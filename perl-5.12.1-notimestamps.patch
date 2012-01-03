@@ -11,7 +11,7 @@ diff -ru perl-5.12.1/config_h.SH perl-notimestamps/config_h.SH
   */
  
  #ifndef _config_h_
-Only in perl-notimestamps: config_h.SH~
+
 diff -ru perl-5.12.1/Configure perl-notimestamps/Configure
 --- perl-5.12.1/Configure	2010-05-14 00:01:07.000000000 +0200
 +++ perl-notimestamps/Configure	2011-08-21 11:53:57.552141211 +0200
@@ -41,7 +41,7 @@ diff -ru perl-5.12.1/Configure perl-notimestamps/Configure
  n='$n'
  need_va_copy='$need_va_copy'
  netdb_hlen_type='$netdb_hlen_type'
-Only in perl-notimestamps: Configure~
+
 diff -ru perl-5.12.1/lib/unicore/mktables perl-notimestamps/lib/unicore/mktables
 --- perl-5.12.1/lib/unicore/mktables	2010-05-14 00:01:07.000000000 +0200
 +++ perl-notimestamps/lib/unicore/mktables	2011-08-21 12:23:27.770106037 +0200
@@ -54,7 +54,7 @@ diff -ru perl-5.12.1/lib/unicore/mktables perl-notimestamps/lib/unicore/mktables
  #
  # - First section is input files
  #   ($0 itself is not listed but is automatically considered an input)
-Only in perl-notimestamps/lib/unicore: mktables~
+
 diff -ru perl-5.12.1/perl.c perl-notimestamps/perl.c
 --- perl-5.12.1/perl.c	2010-05-14 00:01:07.000000000 +0200
 +++ perl-notimestamps/perl.c	2011-08-21 09:07:15.366402229 +0200
@@ -67,4 +67,18 @@ diff -ru perl-5.12.1/perl.c perl-notimestamps/perl.c
  			      SVs_TEMP));
  #  else
      PUSHs(Perl_newSVpvn_flags(aTHX_ STR_WITH_LEN("Compiled on " __DATE__),
-Only in perl-notimestamps: perl.c~
+
+diff -ru perl-5.12.1/cpan/podlators/lib/Pod/Man.pm perl-notimestamps/cpan/podlators/lib/Pod/Man.pm
+--- perl-5.12.1/cpan/podlators/lib/Pod/Man.pm	2010-04-26 08:09:08.000000000 +0000
++++ perl-notimestamps/cpan/podlators/lib/Pod/Man.pm	2012-01-03 17:34:58.014081446 +0000
+@@ -912,7 +912,7 @@
+ .\\" ========================================================================
+ .\\"
+ .IX Title "$index"
+-.TH $name $section "$date" "$$self{release}" "$$self{center}"
++.TH $name $section "$$self{release}" "$$self{center}"
+ .\\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\\" way too many mistakes in technical documents.
+ .if n .ad l
+
+
