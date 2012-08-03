@@ -1,3 +1,6 @@
+* Tue Apr 25 2013 Carsten Munk <carsten.munk@jollamobile.com> - 5.16.1
+- Rebase Vasily's upgrade
+
 * Fri Mar 01 2013 Carsten Munk <carsten.munk@jollamobile.com> - 5.12.1
 - Stop perl from rebuilding constantly, again.
 
@@ -6,6 +9,10 @@
 
 * Tue Jan 22 2013 Oleg Girko <ol+mer@infoserver.ru> - 5.12.1
 - Disable multilib for 64-bit architectures.
+
+* Wed Aug 22 2012 Vasily Gurevich <vas.gurevich@gmail.com> - 5.16.1
+- Upgrade to 5.16.1 from fc18
+  MER#345
 
 * Wed Jan 4 2012 David Greaves <david@dgreaves.com> - 5.12.1
 - Change Pod/Simple to remove datestamps in the man pages.
