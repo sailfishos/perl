@@ -745,7 +745,7 @@ echo "RPM Build arch: %{_arch}"
         -Dinc_version_list=none \
         -Darchname=%{perl_archname} \
 %ifarch %{multilib_64_archs}
-        -Dlibpth="/usr/local/lib64 /lib64 %{_prefix}/lib64" \
+        -Dlibpth="/usr/local/lib /lib %{_prefix}/lib" \
 %endif
 %ifarch sparc sparcv9
         -Ud_longdbl \

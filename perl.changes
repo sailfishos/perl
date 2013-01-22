@@ -1,3 +1,6 @@
+* Tue Jan 22 2013 Oleg Girko <ol+mer@infoserver.ru> - 5.12.1
+- Disable multilib for 64-bit architectures.
+
 * Wed Jan 4 2012 David Greaves <david@dgreaves.com> - 5.12.1
 - Change Pod/Simple to remove datestamps in the man pages.
   MER#66
