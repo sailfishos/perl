@@ -849,12 +849,12 @@ chmod -R u+w $RPM_BUILD_ROOT/*
 
 # Local patch tracking
 cd $RPM_BUILD_ROOT%{_libdir}/perl5/%{perl_version}/%{perl_archname}/CORE/
-perl -x patchlevel.h 'Fedora Patch1: Removes date check, Fedora/RHEL specific'
+%{new_perl} -x patchlevel.h 'Fedora Patch1: Removes date check, Fedora/RHEL specific'
 %ifnarch sparc64
-perl -x patchlevel.h 'Fedora Patch2: Work around annoying rpath issue'
+%{new_perl} -x patchlevel.h 'Fedora Patch2: Work around annoying rpath issue'
 %endif
 %ifarch %{multilib_64_archs}
-perl -x patchlevel.h 'Fedora Patch3: support for libdir64'
+%{new_perl} -x patchlevel.h 'Fedora Patch3: support for libdir64'
 %endif
 rm -rf $RPM_BUILD_ROOT/*.0
 
