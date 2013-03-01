@@ -1,0 +1,24 @@
+diff -ru perl-5.12.1/config_h.SH perl-5.12.1-norebuilds/config_h.SH
+--- perl-5.12.1/config_h.SH	2010-05-14 00:01:07.000000000 +0200
++++ perl-5.12.1-norebuilds/config_h.SH	2013-03-01 17:05:22.845608318 +0100
+@@ -968,7 +968,7 @@
+  *	feature tests from Configure are generally more reliable.
+  */
+ #define OSNAME "$osname"		/**/
+-#define OSVERS "$osvers"		/**/
++#define OSVERS "3.0"		/**/
+ 
+ /* ARCHLIB:
+  *	This variable, if defined, holds the name of the directory in
+diff -ru perl-5.12.1/cpan/Devel-PPPort/parts/ppptools.pl perl-5.12.1-norebuilds/cpan/Devel-PPPort/parts/ppptools.pl
+--- perl-5.12.1/cpan/Devel-PPPort/parts/ppptools.pl	2010-04-26 10:08:29.000000000 +0200
++++ perl-5.12.1-norebuilds/cpan/Devel-PPPort/parts/ppptools.pl	2013-03-01 17:09:01.134007016 +0100
+@@ -31,7 +31,7 @@
+   local *DIR;
+ 
+   opendir DIR, $dir or die "cannot open directory $dir: $!\n";
+-  my @files = grep { !-d && !/^\./ } readdir DIR;  # no dirs or hidden files
++  my @files = sort grep { !-d && !/^\./ } readdir DIR;  # no dirs or hidden files
+   closedir DIR;
+ 
+   return map { cat_file($dir, $_) } @files;

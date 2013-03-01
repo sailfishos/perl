@@ -1,3 +1,6 @@
+* Fri Mar 01 2013 Carsten Munk <carsten.munk@jollamobile.com> - 5.12.1
+- Stop perl from rebuilding constantly, again.
+
 * Tue Jan 22 2013 Oleg Girko <ol+mer@infoserver.ru> - 5.12.1
 - Use newly built perl instead of installed one to edit patchlevel.h.
 

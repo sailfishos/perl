@@ -54,6 +54,8 @@ Patch7:        perl-5.10.0-x86_64-io-test-failure.patch
 
 Patch8:	       perl-5.12.1-notimestamps.patch
 
+Patch9:        perl-5.12.1-norebuilds.patch
+
 BuildRoot:      %{_tmppath}/%{name}-%{perl_version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  gdbm-devel, db4-devel, zlib-devel
 BuildRequires:  groff
@@ -683,7 +685,7 @@ upstream tarball from perl.org.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-
+%patch9 -p1
 #
 # Candidates for doc recoding (need case by case review):
 # find . -name "*.pod" -o -name "README*" -o -name "*.pm" | xargs file -i | grep charset= | grep -v '\(us-ascii\|utf-8\)'
@@ -782,6 +784,8 @@ make %{?_smp_mflags}
 
 
 %install
+ORIG=$PWD
+
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
@@ -856,6 +860,8 @@ cd $RPM_BUILD_ROOT%{_libdir}/perl5/%{perl_version}/%{perl_archname}/CORE/
 %ifarch %{multilib_64_archs}
 %{new_perl} -x patchlevel.h 'Fedora Patch3: support for libdir64'
 %endif
+
+cd $ORIG
 rm -rf $RPM_BUILD_ROOT/*.0
 
 %clean
