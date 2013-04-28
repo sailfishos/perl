@@ -73,7 +73,7 @@ Patch7:         perl-5.10.0-x86_64-io-test-failure.patch
 # switch off test, which is failing only on koji (fork)
 Patch8:         perl-5.14.1-offtest.patch
 
- Fix find2perl to translate ? glob properly, rhbz#825701, RT#113054
+# Fix find2perl to translate ? glob properly, rhbz#825701, RT#113054
 Patch9:         perl-5.14.2-find2perl-transtate-question-mark-properly.patch
 
 # Fix broken atof, rhbz#835452, RT#109318
@@ -1529,7 +1529,7 @@ popd
 ##find $RPM_BUILD_ROOT -name '*B*zip2*'| xargs rm
 
 # Local patch tracking
-cd $RPM_BUILD_ROOT%{_libdir}/perl5/%{perl_version}/%{perl_archname}/CORE/
+cd $RPM_BUILD_ROOT%{_libdir}/perl5/CORE/
 %{new_perl} -x patchlevel.h 'Fedora Patch1: Removes date check, Fedora/RHEL specific'
 %ifnarch sparc64
 %{new_perl} -x patchlevel.h 'Fedora Patch2: Work around annoying rpath issue'
@@ -1561,6 +1561,7 @@ for package in Test-Simple; do
     done
 done
 popd
+
 
 # Systemtap tapset install
 mkdir -p %{buildroot}%{tapsetdir}
