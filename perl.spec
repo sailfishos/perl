@@ -1,5 +1,5 @@
 %global perl_version    5.16.1
-%global perl_epoch      4
+%global perl_epoch      2
 %global perl_arch_stem -thread-multi
 %global perl_archname %{_arch}-%{_os}%{perl_arch_stem}
 
@@ -25,8 +25,7 @@
 
 Name:           perl
 Version:        %{perl_version}
-# release number must be even higher, because dual-lived modules will be broken otherwise
-Release:        228%{?dist}
+Release:        1%{?dist}
 Epoch:          %{perl_epoch}
 Summary:        Practical Extraction and Report Language
 Group:          Development/Languages
@@ -41,7 +40,7 @@ Url:            http://www.perl.org/
 Source0:        http://www.cpan.org/src/5.0/perl-%{perl_version}.tar.bz2
 Source2:        perl-5.8.0-libnet.cfg
 Source3:        macros.perl
-#Systemtap tapset and example that make use of systemtap-sdt-devel
+# Systemtap tapset and example that make use of systemtap-sdt-devel
 # build requirement. Written by lberk; Not yet upstream.
 Source4:        perl.stp
 Source5:        perl-example.stp
@@ -79,11 +78,6 @@ Patch9:         perl-5.14.2-find2perl-transtate-question-mark-properly.patch
 # Fix broken atof, rhbz#835452, RT#109318
 Patch10:        perl-5.16.0-fix-broken-atof.patch
 
-# Fix searching for Unicode::Collate::Locale data, rhbz#756118, CPANRT#72666,
-# fixed in Unicode-Collate-0.87.
-# TODO Looks like it was fixed differently?
-#Patch13:        perl-5.14.2-locale-search-inc.patch
-
 Patch11:        perl-5.12.1-notimestamps.patch
 
 Patch12:        perl-5.12.1-norebuilds.patch
@@ -97,16 +91,11 @@ BuildRequires:  groff, db4-devel, zlib-devel, bzip2-devel
 BuildRequires: gdbm-devel
 %endif
 
-# For tests
-#BuildRequires:  procps
-
 # The long line of Perl provides.
-
 # Compat provides
 Provides: perl(:MODULE_COMPAT_5.16.1)
 Provides: perl(:MODULE_COMPAT_5.16.0)
 Provides: perl(:MODULE_COMPAT_5.12.1)
-
 # Threading provides
 Provides: perl(:WITH_ITHREADS)
 Provides: perl(:WITH_THREADS)
@@ -157,9 +146,6 @@ Provides: perl(Carp::Heavy)
 Provides: perl-File-Temp = 0.22 
 Obsoletes: perl-File-Temp < 0.20
 
-# suidperl isn't created by upstream since 5.12.0
-Obsoletes: perl-suidperl <= 4:5.12.2
-
 Requires: perl-libs = %{perl_epoch}:%{perl_version}-%{release}
 
 # We need this to break the dependency loop, and ensure that perl-libs 
@@ -183,6 +169,7 @@ scripts.
 Install this package if you want to program in Perl or enable your system to
 handle Perl scripts.
 
+
 %package libs
 Summary:        The libraries for the perl runtime
 Group:          Development/Languages
@@ -194,7 +181,7 @@ The libraries for the perl runtime
 
 
 %package devel
-Summary:        Header #files for use in perl development
+Summary:        Header files for use in perl development
 Group:          Development/Languages
 License:        GPL+ or Artistic
 Requires:       perl(ExtUtils::ParseXS)
@@ -221,8 +208,6 @@ by perl. Perl is needed because of git.
 Summary:        The Perl test suite
 Group:          Development/Languages
 License:        GPL+ or Artistic
-# right?
-AutoReqProv:    0
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 # FIXME - note this will need to change when doing the core/minimal swizzle
 Requires:       perl-core
@@ -238,8 +223,6 @@ modules).
 Summary:        Generic archive extracting mechanism
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        0.58
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -252,7 +235,6 @@ Archive::Extract is a generic archive extraction mechanism.
 Summary:        A module for Perl manipulation of .tar files
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        1.82 
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 Requires:       perl(Compress::Zlib), perl(IO::Zlib)
@@ -266,34 +248,10 @@ IO::Zlib module installed, Archive::Tar will also support compressed or
 gzipped tar files.
 
 
-#%package Carp
-#Summary:        Alternative warn and die for modules
-#Epoch:          0
-#Version:        1.26
-#License:        GPL+ or Artistic
-#Group:          Development/Libraries
-#Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
-#Provides:       perl(Carp::Heavy) = %{version}
-#BuildArch:      noarch
-
-# Do not export unversioned module
-#%global __provides_exclude %{?__provides_exclude:%__provides_exclude|}^perl\\(Carp\\)\\s*$
-
-#%description Carp
-#The Carp routines are useful in your own modules because they act like
-#die() or warn(), but with a message which is more likely to be useful to a
-#user of your module. In the case of cluck, confess, and longmess that
-#context is a summary of every call in the call-stack. For a shorter message
-#you can use carp or croak which report the error as being from where your
-#module was called. There is no guarantee that that is where the error was,
-#but it is a good educated guess.
-
-
 %package CGI
 Summary:        Handle Common Gateway Interface requests and responses
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        3.59
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 Provides:       perl(CGI) = %{version}
@@ -321,7 +279,6 @@ with built-in support for mod_perl and mod_perl2 as well as FastCGI.
 Summary:        Low-Level Interface to bzip2 compression library
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        2.048
 Requires:       perl(Exporter), perl(File::Temp)
 
@@ -334,7 +291,6 @@ It is used by IO::Compress::Bzip2.
 Summary:        Low-Level Interface to the zlib compression library
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        2.048
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 
@@ -347,7 +303,6 @@ It is used by IO::Compress::Zlib.
 Summary:        Query, download and build perl modules from CPAN sites
 Group:          Development/Languages
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        1.9800
 # CPAN encourages Digest::SHA strongly because of integrity checks
 Requires:       perl(Digest::SHA)
@@ -360,7 +315,6 @@ Query, download and build perl modules from CPAN sites.
 
 #%package CPAN-Meta
 #Summary:        Distribution metadata for a CPAN dist
-#Epoch:          0
 #Version:        2.120630
 #License:        GPL+ or Artistic
 #Group:          Development/Libraries
@@ -377,7 +331,6 @@ Query, download and build perl modules from CPAN sites.
 
 %package CPAN-Meta-YAML
 Version:        0.007
-Epoch:          0
 Summary:        Read and write a subset of YAML for CPAN Meta files
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -394,7 +347,6 @@ used for any other general YAML parsing or generation task.
 Summary:        API & CLI access to the CPAN mirrors
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 # real version 0.9121
 Version:        0.91.21
 # CPANPLUS encourages Digest::SHA strongly because of integrity checks
@@ -411,29 +363,10 @@ The CPANPLUS library is an API to the CPAN mirrors and a collection of
 interactive shells, commandline programs, etc, that use this API.
 
 
-#%package Data-Dumper
-#Summary:        Stringify perl data structures, suitable for printing and eval
-#Group:          Development/Libraries
-#License:        GPL+ or Artistic
-#Epoch:          0
-#Version:        2.135.06
-#Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
-#Requires:       perl(Scalar::Util)
-#Requires:       perl(XSLoader)
-
-#%description Data-Dumper
-#Given a list of scalars or reference variables, writes out their contents
-#in perl syntax. The references can also be objects. The content of each
-#variable is output in a single Perl statement. Handles self-referential
-#structures correctly.
-
-
 %package Digest
 Summary:        Modules that calculate message digests
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          0
 Version:        1.17
 BuildArch:      noarch
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -447,30 +380,10 @@ the algorithm used. The message is simply a sequence of arbitrary
 bytes or bits.
 
 
-#%package Digest-MD5
-#Summary:        Perl interface to the MD5 Algorithm
-#Group:          Development/Libraries
-#License:        GPL+ or Artistic
-## Epoch bump for clean upgrade over old standalone package
-#Epoch:          0
-#Version:        2.51
-#Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
-## Recommended
-#Requires:       perl(Digest::base) >= 1.00
-
-#%description Digest-MD5
-#The Digest::MD5 module allows you to use the RSA Data Security Inc. MD5
-#Message Digest algorithm from within Perl programs. The algorithm takes as
-#input a message of arbitrary length and produces as output a 128-bit
-#"fingerprint" or "message digest" of the input.
-
-
 %package Digest-SHA
 Summary:        Perl extension for SHA-1/224/256/384/512
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        5.71
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 # Recommended
@@ -488,8 +401,6 @@ module can handle all types of input, including partial-byte data.
 Summary:        Compile and link C code for Perl modules
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 # real version 0.280206 https://fedoraproject.org/wiki/Perl/Tips#Dot_approach
 Version:        0.28.2.6
 Requires:       perl-devel
@@ -506,7 +417,6 @@ by the Module::Build project, but may be useful for other purposes as well.
 Summary:        Utilities for embedding Perl in C/C++ applications
 Group:          Development/Languages
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        1.30
 Requires:       perl-devel
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -520,7 +430,6 @@ Utilities for embedding Perl in C/C++ applications.
 Summary:        Install files from here to there
 Group:          Development/Languages
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        1.58
 Requires:       perl-devel
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -535,7 +444,6 @@ pages, etc.
 Summary:        Create a module Makefile
 Group:          Development/Languages
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        6.63.2
 Requires:       perl-devel
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -557,7 +465,6 @@ Create a module Makefile.
 Summary:        Utilities to write and check a MANIFEST file
 Group:          Development/Languages
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        1.61
 Requires:       perl-devel
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -571,8 +478,6 @@ BuildArch:      noarch
 Summary:        Module and a script for converting Perl XS code into C code
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        3.16
 Requires:       perl-devel
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -588,7 +493,6 @@ necessary to let Perl access those functions.
 Summary:        Generic file fetching mechanism
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        0.32 
 Requires:       perl(IPC::Cmd) >= 0.36
 Requires:       perl(Module::Load::Conditional) >= 0.04
@@ -604,7 +508,6 @@ File::Fetch is a generic file fetching mechanism.
 Summary:        Perl source filters
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        1.40
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 
@@ -614,28 +517,30 @@ a C preprocessor alters the source text of a C program before the compiler
 sees it.
 
 
-#%package IO-Compress
-#Summary:        IO::Compress wrapper for modules
-#Group:          Development/Libraries
-#License:        GPL+ or Artistic
-#Epoch:          0
-#Version:        2.048
-#Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
-#Obsoletes:      perl-Compress-Zlib <= 2.020
-#Provides:       perl(IO::Uncompress::Bunzip2)
+%package IO-Compress
+Summary:        IO::Compress wrapper for modules
+Group:          Development/Libraries
+License:        GPL+ or Artistic
+Version:        2.048
+Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Obsoletes:      perl-Compress-Zlib <= 2.020
+Provides:       perl-Compress-Zlib > 2.020
+Obsoletes:      perl-IO-Compress-Zlib <= 2.008
+Provides:       perl-IO-Compress-Zlib > 2.008
+Obsoletes:      perl-IO-Compress-Base <= 2.008
+Provides:       perl-IO-Compress-Base > 2.008
+Provides:       perl(IO::Uncompress::Bunzip2)
 
-#%description IO-Compress
-#This module is the base class for all IO::Compress and IO::Uncompress modules.
-#This module is not intended for direct use in application code. Its sole
-#purpose is to to be sub-classed by IO::Compress modules.
+%description IO-Compress
+This module is the base class for all IO::Compress and IO::Uncompress modules.
+This module is not intended for direct use in application code. Its sole
+purpose is to to be sub-classed by IO::Compress modules.
 
 
 %package IO-Zlib
 Summary:        Perl IO:: style interface to Compress::Zlib
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        1.10
 Requires:       perl(Compress::Zlib)
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -652,8 +557,6 @@ of file it is using.
 Summary:        Finding and running system commands made easy
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        0.76
 Requires:       perl(ExtUtils::MakeMaker)
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -668,9 +571,7 @@ independent way, but have them still work.
 Summary:        A small, simple, correct HTTP/1.1 client
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        0.017
-#Requires:       perl(Carp)
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 Requires:       perl(IO::Socket)
 BuildArch:      noarch
@@ -685,7 +586,6 @@ resumes after EINTR.
 
 %package JSON-PP
 Summary:        JSON::XS compatible pure-Perl module
-Epoch:          0
 # 2.27150 version is a typo but we cannot fix it because it would break
 # monotony
 Version:        2.27200
@@ -703,7 +603,6 @@ JSON::PP is a pure-Perl module and is compatible with JSON::XS.
 
 %package Locale-Codes
 Summary:        Distribution of modules to handle locale codes
-Epoch:          0
 Version:        3.21
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -725,8 +624,6 @@ including languages, countries, currency, etc.
 Summary:        Simple interface to Locale::Maketext::Lexicon
 Group:          Development/Libraries
 License:        MIT
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        0.21
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -740,8 +637,6 @@ to alleviate the need of creating Language Classes for module authors.
 Summary:        Generic message storage mechanism
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        0.04
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 # Add a versioned provides, since we pull the unversioned one out.
@@ -761,7 +656,6 @@ example, log it, or die with it).
 Summary:        Simplified frontend to Log::Message
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        0.08
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -775,12 +669,9 @@ Log::Message module.
 Summary:        Perl module for building and installing Perl modules
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Check epoch with standalone package
-Epoch:          2
 # real version 0.39_01
 Version:        0.39.01 
 Requires:       perl(Archive::Tar) >= 1.08
-#Requires:       perl(CPAN::Meta) >= 2.110420
 Requires:       perl(ExtUtils::CBuilder) >= 0.15
 Requires:       perl(ExtUtils::ParseXS) >= 1.02
 Requires:       perl-devel
@@ -803,7 +694,6 @@ install a few additional modules.
 Summary:        Perl core modules indexed by perl versions
 Group:          Development/Languages
 License:        GPL+ or Artistic
-Epoch:          1
 Version:        2.70
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 Requires:       perl(version)
@@ -819,8 +709,6 @@ is keyed on perl version as indicated in $].  The second level hash is module
 Summary:        Runtime require of both modules and files
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        0.22
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -834,7 +722,6 @@ either a file or a module.
 Summary:        Looking up module information / loading at runtime
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        0.46
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -848,8 +735,6 @@ of the modules you have installed on your system during runtime.
 Summary:        Mark modules as loaded or unloaded
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        0.08
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -864,7 +749,6 @@ offers you a very simple way to mark modules as loaded and/or unloaded.
 
 %package Module-Metadata
 Summary:        Gather package and POD information from perl module files
-Epoch:          0
 Version:        1.000009
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -878,8 +762,6 @@ Gather package and POD information from perl module files
 Summary:        Automatically give your module the ability to have plugins
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 # Keep two digit decimal part
 Version:        4.00 
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -894,8 +776,6 @@ module.
 Summary:        Perl module that allows per object accessors
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        0.42
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -909,8 +789,6 @@ opposed to per Class accessors, as, for example, Class::Accessor provides).
 Summary:        List all constants declared in a package
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        0.02
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -921,25 +799,10 @@ can be useful for, among others, setting up an autogenerated @EXPORT/@EXPORT_OK
 for a Constants.pm file.
 
 
-#%package PathTools
-#Summary:        PathTools Perl module (Cwd, File::Spec)
-## PathTools aka File::Spec
-#Group:          Development/Libraries
-#License:        (GPL+ or Artistic) and BSD
-#Epoch:          0
-#Version:        3.39.2
-#Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
-
-#%description PathTools
-#PathTools Perl module (Cwd, File::Spec).
-
-
 %package Params-Check
 Summary:        Generic input parsing/checking mechanism
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        0.32
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -952,8 +815,6 @@ Params::Check is a generic input parsing/checking mechanism.
 Summary:        Parse META.yml and other similar CPAN metadata files
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        1.4402
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -970,7 +831,6 @@ YAML::Tiny.
 %package Perl-OSType
 Summary:        Map Perl operating system names to generic types
 Version:        1.002
-Epoch:          0
 License:        GPL+ or Artistic
 Group:          Development/Libraries
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -990,8 +850,6 @@ systems are given the type 'Windows' rather than 'Win32').
 Summary:        Perl module for resolving POD escape sequences
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        1.04
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -1005,7 +863,6 @@ Presumably, it should be used only by Pod parsers and/or formatters.
 Summary:        Basic perl modules for handling Plain Old Documentation (POD)
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        1.51
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 # Pod::Usage executes perldoc from perl-Pod-Perldoc by default
@@ -1022,7 +879,6 @@ Perl5 distribution for more information about POD.
 Summary:        Look up Perl documentation in Pod format
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        3.17.00
 # Pod::Perldoc::ToMan executes roff
 Requires:       groff
@@ -1040,8 +896,6 @@ the perl library modules.
 Summary:        Framework for parsing POD documentation
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        3.20
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -1051,11 +905,11 @@ Pod::Simple is a Perl library for parsing text in the Pod ("plain old
 documentation") markup language that is typically used for writing
 documentation for Perl and for Perl modules.
 
+
 %package Scalar-List-Utils
 Summary:        A selection of general-utility scalar and list subroutines
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        1.25
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 
@@ -1070,7 +924,6 @@ such that being individual extensions would be wasteful.
 Summary:        Term::ReadLine UI made easy
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        0.30
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 Requires:       perl(Log::Message::Simple)
@@ -1086,7 +939,6 @@ proper and re-issuing the question.
 Summary:        Run Perl standard test scripts with statistics
 Group:          Development/Languages
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        3.23
 Requires:       perl-devel
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -1099,11 +951,11 @@ Obsoletes:      perl-TAP-Harness < 3.10
 Run Perl standard test scripts with statistics.
 Use TAP::Parser, Test::Harness package was whole rewritten.
 
+
 %package Test-Simple
 Summary:        Basic utilities for writing tests
 Group:          Development/Languages
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        0.98
 Requires:       perl-devel
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -1118,7 +970,6 @@ Basic utilities for writing tests.
 Summary:        Test suite for package perl-Test-Simple
 Group:          Development/Debug
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        0.98
 Requires:       perl-Test-Simple = %{epoch}:%{version}-%{release}
 Requires:       /usr/bin/prove
@@ -1133,7 +984,6 @@ This package provides the test suite for package perl-Test-Simple.
 Summary:        Time objects from localtime and gmtime
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 # real 1.20_01
 Version:        1.20.1
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
@@ -1149,8 +999,6 @@ behave as expected.
 Summary:        Establish an ISA relationship with base classes at compile time
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          1
 Version:        0.225
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -1173,7 +1021,6 @@ inheritance from those modules at the same time. Mostly similar in effect to:
 Summary:        C socket.h defines and structure manipulators
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        2.001
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 
@@ -1189,7 +1036,6 @@ includes all of the commonly used pound-defines like AF_INET, SOCK_STREAM, etc.
 Summary:        Perl interpreter-based threads
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        1.86
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 
@@ -1210,7 +1056,6 @@ variables, you need to also load threads::shared.
 Summary:        Perl extension for sharing data structures between threads
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        1.40
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 
@@ -1227,8 +1072,6 @@ hashes and hash refs.
 Summary:        Perl extension for Version Objects
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-# Epoch bump for clean upgrade over old standalone package
-Epoch:          3
 Version:        0.99
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
@@ -1242,7 +1085,6 @@ Summary:        Set of version requirements for a CPAN dist
 License:        GPL+ or Artistic
 Group:          Development/Libraries
 Version:        0.101022
-Epoch:          0
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
 
@@ -1260,7 +1102,6 @@ Group:          Development/Languages
 # Nevertheless, it needs a License tag, so we'll use the generic
 # "perl" license.
 License:        GPL+ or Artistic
-Epoch:          0
 Version:        %{perl_version}
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 Requires:       perl-libs = %{perl_epoch}:%{perl_version}-%{release}
@@ -1268,24 +1109,19 @@ Requires:       perl-devel = %{perl_epoch}:%{perl_version}-%{release}
 Requires:       perl-macros
 
 Requires:       perl-Archive-Extract, perl-Archive-Tar, perl-Compress-Raw-Bzip2
-#Requires:       perl-Carp, perl-Compress-Raw-Zlib, perl-CGI, perl-CPAN,
 Requires:       perl-Compress-Raw-Zlib, perl-CGI, perl-CPAN,
-#Requires:       perl-CPAN-Meta, perl-CPAN-Meta-YAML, perl-CPANPLUS,
 Requires:       perl-CPAN-Meta-YAML, perl-CPANPLUS,
-#Requires:       perl-Data-Dumper, perl-Digest, perl-Digest-MD5, perl-Digest-SHA,
 Requires:       perl-Digest, perl-Digest-SHA,
 Requires:       perl-ExtUtils-CBuilder, perl-ExtUtils-Embed,
 Requires:       perl-ExtUtils-Install, perl-ExtUtils-MakeMaker
 Requires:       perl-ExtUtils-Manifest
 Requires:       perl-ExtUtils-ParseXS, perl-File-Fetch, perl-Filter,
 Requires:       perl-HTTP-Tiny
-#Requires:       perl-IO-Compress, perl-IO-Zlib, perl-IPC-Cmd, perl-JSON-PP
 Requires:       perl-IO-Zlib, perl-IPC-Cmd, perl-JSON-PP
 Requires:       perl-Locale-Codes, perl-Locale-Maketext-Simple
 Requires:       perl-Log-Message, perl-Log-Message-Simple, perl-Module-Build
 Requires:       perl-Module-CoreList, perl-Module-Load
 Requires:       perl-Module-Load-Conditional, perl-Module-Loaded, perl-Module-Metadata
-#Requires:       perl-Module-Pluggable, perl-Object-Accessor, perl-Package-Constants, perl-PathTools
 Requires:       perl-Module-Pluggable, perl-Object-Accessor, perl-Package-Constants
 Requires:       perl-Params-Check, perl-Parse-CPAN-Meta, perl-Perl-OSType
 Requires:       perl-Pod-Escapes, perl-Pod-Parser, perl-Pod-Perldoc
@@ -1523,11 +1359,6 @@ pushd %{build_archlib}/CORE/
 rm patchlevel.bak
 popd
 
-# for now, remove Bzip2:
-# Why? Now is missing Bzip2 files and provides
-##find $RPM_BUILD_ROOT -name Bzip2 | xargs rm -r
-##find $RPM_BUILD_ROOT -name '*B*zip2*'| xargs rm
-
 # Local patch tracking
 cd $RPM_BUILD_ROOT%{_libdir}/perl5/CORE/
 %{new_perl} -x patchlevel.h 'Fedora Patch1: Removes date check, Fedora/RHEL specific'
@@ -1641,11 +1472,6 @@ sed \
 %exclude %{_mandir}/man1/ptargrep.1*
 %exclude %{_mandir}/man3/Archive::Tar*
 
-# Carp
-#%exclude %{privlib}/Carp
-#%exclude %{privlib}/Carp.*
-#%exclude %{_mandir}/man3/Carp.*
-
 # CGI
 %exclude %{privlib}/CGI/
 %exclude %{privlib}/CGI.pm
@@ -1659,16 +1485,6 @@ sed \
 %exclude %{_mandir}/man1/cpan.1*
 %exclude %{_mandir}/man3/CPAN.*
 %exclude %{_mandir}/man3/CPAN:*
-
-# CPAN-Meta
-#%exclude %{privlib}/CPAN/Meta.pm
-#%exclude %{privlib}/CPAN/Meta/Converter.pm
-#%exclude %{privlib}/CPAN/Meta/Feature.pm
-#%exclude %{privlib}/CPAN/Meta/History.pm
-#%exclude %{privlib}/CPAN/Meta/Prereqs.pm
-#%exclude %{privlib}/CPAN/Meta/Spec.pm
-#%exclude %{privlib}/CPAN/Meta/Validator.pm
-#%exclude %{_mandir}/man3/CPAN::Meta*
 
 # CPAN-Meta-YAML
 %exclude %{privlib}/CPAN/Meta/YAML.pm
@@ -1702,14 +1518,6 @@ sed \
 %exclude %{archlib}/auto/Compress/Raw/Zlib/
 %exclude %{_mandir}/man3/Compress::Raw::Zlib*
 
-# Data::Dumper
-#%exclude %dir %{archlib}/auto/Data
-#%exclude %dir %{archlib}/auto/Data/Dumper
-#%exclude %{archlib}/auto/Data/Dumper/Dumper.so
-#%exclude %dir %{archlib}/Data
-#%exclude %{archlib}/Data/Dumper.pm
-#%exclude %{_mandir}/man3/Data::Dumper.3*
-
 # Digest
 %exclude %{privlib}/Digest.pm
 %exclude %dir %{privlib}/Digest
@@ -1718,11 +1526,6 @@ sed \
 %exclude %{_mandir}/man3/Digest.3*
 %exclude %{_mandir}/man3/Digest::base.3*
 %exclude %{_mandir}/man3/Digest::file.3*
-
-# Digest::MD5
-#%exclude %{archlib}/Digest/MD5.pm
-#%exclude %{archlib}/auto/Digest/MD5/
-#%exclude %{_mandir}/man3/Digest::MD5.3*
 
 # Digest::SHA
 %exclude %{_bindir}/shasum
@@ -1811,52 +1614,52 @@ sed \
 %exclude %{_mandir}/man1/perlfilter.*
 %exclude %{_mandir}/man3/Filter::Util::*
 
-# IO::Compress
-#%exclude %{_bindir}/zipdetails
-#%exclude %{privlib}/IO/Compress/FAQ.pod
-#%exclude %{_mandir}/man1/zipdetails.*
-#%exclude %{_mandir}/man3/IO::Compress::FAQ.*
-# Compress::Zlib
-#%exclude %{privlib}/Compress/Zlib.pm
-#%exclude %{_mandir}/man3/Compress::Zlib*
-# IO::Compress::Base
-#%exclude %{privlib}/File/GlobMapper.pm
-#%exclude %{privlib}/IO/Compress/Base/
-#%exclude %{privlib}/IO/Compress/Base.pm
-#%exclude %{privlib}/IO/Uncompress/AnyUncompress.pm
-#%exclude %{privlib}/IO/Uncompress/Base.pm
-#%exclude %{_mandir}/man3/File::GlobMapper.*
-#%exclude %{_mandir}/man3/IO::Compress::Base.*
-#%exclude %{_mandir}/man3/IO::Uncompress::AnyUncompress.*
-#%exclude %{_mandir}/man3/IO::Uncompress::Base.*
-# IO::Compress::Zlib
-#%exclude %{privlib}/IO/Compress/Adapter/
-#%exclude %{privlib}/IO/Compress/Deflate.pm
-#%exclude %{privlib}/IO/Compress/Gzip/
-#%exclude %{privlib}/IO/Compress/Gzip.pm
-#%exclude %{privlib}/IO/Compress/RawDeflate.pm
-#%exclude %{privlib}/IO/Compress/Bzip2.pm
-#%exclude %{privlib}/IO/Compress/Zip/
-#%exclude %{privlib}/IO/Compress/Zip.pm
-#%exclude %{privlib}/IO/Compress/Zlib/
-#%exclude %{privlib}/IO/Uncompress/Adapter/
-#%exclude %{privlib}/IO/Uncompress/AnyInflate.pm
-#%exclude %{privlib}/IO/Uncompress/Bunzip2.pm
-#%exclude %{privlib}/IO/Uncompress/Gunzip.pm
-#%exclude %{privlib}/IO/Uncompress/Inflate.pm
-#%exclude %{privlib}/IO/Uncompress/RawInflate.pm
-#%exclude %{privlib}/IO/Uncompress/Unzip.pm
-#%exclude %{_mandir}/man3/IO::Compress::Deflate*
-#%exclude %{_mandir}/man3/IO::Compress::Bzip2*
-#%exclude %{_mandir}/man3/IO::Compress::Gzip*
-#%exclude %{_mandir}/man3/IO::Compress::RawDeflate*
-#%exclude %{_mandir}/man3/IO::Compress::Zip*
-#%exclude %{_mandir}/man3/IO::Uncompress::AnyInflate*
-#%exclude %{_mandir}/man3/IO::Uncompress::Bunzip2*
-#%exclude %{_mandir}/man3/IO::Uncompress::Gunzip*
-#%exclude %{_mandir}/man3/IO::Uncompress::Inflate*
-#%exclude %{_mandir}/man3/IO::Uncompress::RawInflate*
-#%exclude %{_mandir}/man3/IO::Uncompress::Unzip*
+# IO-Compress
+%exclude %{_bindir}/zipdetails
+%exclude %{privlib}/IO/Compress/FAQ.pod
+%exclude %{_mandir}/man1/zipdetails.*
+%exclude %{_mandir}/man3/IO::Compress::FAQ.*
+# Compress-Zlib
+%exclude %{privlib}/Compress/Zlib.pm
+%exclude %{_mandir}/man3/Compress::Zlib*
+# IO-Compress-Base
+%exclude %{privlib}/File/GlobMapper.pm
+%exclude %{privlib}/IO/Compress/Base/
+%exclude %{privlib}/IO/Compress/Base.pm
+%exclude %{privlib}/IO/Uncompress/AnyUncompress.pm
+%exclude %{privlib}/IO/Uncompress/Base.pm
+%exclude %{_mandir}/man3/File::GlobMapper.*
+%exclude %{_mandir}/man3/IO::Compress::Base.*
+%exclude %{_mandir}/man3/IO::Uncompress::AnyUncompress.*
+%exclude %{_mandir}/man3/IO::Uncompress::Base.*
+# IO-Compress-Zlib
+%exclude %{privlib}/IO/Compress/Adapter/
+%exclude %{privlib}/IO/Compress/Deflate.pm
+%exclude %{privlib}/IO/Compress/Gzip/
+%exclude %{privlib}/IO/Compress/Gzip.pm
+%exclude %{privlib}/IO/Compress/RawDeflate.pm
+%exclude %{privlib}/IO/Compress/Bzip2.pm
+%exclude %{privlib}/IO/Compress/Zip/
+%exclude %{privlib}/IO/Compress/Zip.pm
+%exclude %{privlib}/IO/Compress/Zlib/
+%exclude %{privlib}/IO/Uncompress/Adapter/
+%exclude %{privlib}/IO/Uncompress/AnyInflate.pm
+%exclude %{privlib}/IO/Uncompress/Bunzip2.pm
+%exclude %{privlib}/IO/Uncompress/Gunzip.pm
+%exclude %{privlib}/IO/Uncompress/Inflate.pm
+%exclude %{privlib}/IO/Uncompress/RawInflate.pm
+%exclude %{privlib}/IO/Uncompress/Unzip.pm
+%exclude %{_mandir}/man3/IO::Compress::Deflate*
+%exclude %{_mandir}/man3/IO::Compress::Bzip2*
+%exclude %{_mandir}/man3/IO::Compress::Gzip*
+%exclude %{_mandir}/man3/IO::Compress::RawDeflate*
+%exclude %{_mandir}/man3/IO::Compress::Zip*
+%exclude %{_mandir}/man3/IO::Uncompress::AnyInflate*
+%exclude %{_mandir}/man3/IO::Uncompress::Bunzip2*
+%exclude %{_mandir}/man3/IO::Uncompress::Gunzip*
+%exclude %{_mandir}/man3/IO::Uncompress::Inflate*
+%exclude %{_mandir}/man3/IO::Uncompress::RawInflate*
+%exclude %{_mandir}/man3/IO::Uncompress::Unzip*
 
 # IO::Zlib
 %exclude %{privlib}/IO/Zlib.pm
@@ -1955,13 +1758,6 @@ sed \
 # Package-Constants
 %exclude %{privlib}/Package/
 %exclude %{_mandir}/man3/Package::Constants*
-
-# PathTools
-#%exclude %{archlib}/Cwd.pm
-#%exclude %{archlib}/File/Spec*
-#%exclude %{archlib}/auto/Cwd/
-#%exclude %{_mandir}/man3/Cwd*
-#%exclude %{_mandir}/man3/File::Spec*
 
 # Params-Check
 %exclude %{privlib}/Params/
@@ -2129,11 +1925,6 @@ sed \
 %{_mandir}/man1/ptargrep.1*
 %{_mandir}/man3/Archive::Tar* 
 
-#%files Carp
-#%{privlib}/Carp
-#%{privlib}/Carp.*
-#%{_mandir}/man3/Carp.*
-
 %files CGI
 %{privlib}/CGI/
 %{privlib}/CGI.pm
@@ -2169,18 +1960,6 @@ sed \
 %exclude %{privlib}/CPAN/Meta.pm
 %exclude %{_mandir}/man3/CPAN::Meta*
 
-#%files CPAN-Meta
-#%dir %{privlib}/CPAN/Meta
-#%{privlib}/CPAN/Meta.pm
-#%{privlib}/CPAN/Meta/Converter.pm
-#%{privlib}/CPAN/Meta/Feature.pm
-#%{privlib}/CPAN/Meta/History.pm
-#%{privlib}/CPAN/Meta/Prereqs.pm
-#%{privlib}/CPAN/Meta/Spec.pm
-#%{privlib}/CPAN/Meta/Validator.pm
-#%{_mandir}/man3/CPAN::Meta*
-#%exclude %{_mandir}/man3/CPAN::Meta::YAML*
-
 %files CPAN-Meta-YAML
 %{privlib}/CPAN/Meta/YAML.pm
 %{_mandir}/man3/CPAN::Meta::YAML*
@@ -2195,14 +1974,6 @@ sed \
 %{_mandir}/man1/cpanp.1*
 %{_mandir}/man3/CPANPLUS*
 
-#%files Data-Dumper
-#%dir %{archlib}/auto/Data
-#%dir %{archlib}/auto/Data/Dumper
-#%{archlib}/auto/Data/Dumper/Dumper.so
-#%dir %{archlib}/Data
-#%{archlib}/Data/Dumper.pm
-#%{_mandir}/man3/Data::Dumper.3*
-
 %files Digest
 %{privlib}/Digest.pm
 %dir %{privlib}/Digest
@@ -2211,11 +1982,6 @@ sed \
 %{_mandir}/man3/Digest.3*
 %{_mandir}/man3/Digest::base.3*
 %{_mandir}/man3/Digest::file.3*
-
-#%files Digest-MD5
-#%{archlib}/Digest/MD5.pm
-#%{archlib}/auto/Digest/MD5/
-#%{_mandir}/man3/Digest::MD5.3*
 
 %files Digest-SHA
 %{_bindir}/shasum
@@ -2305,54 +2071,54 @@ sed \
 %{_mandir}/man1/perlfilter.*
 %{_mandir}/man3/Filter::Util::*
 
-#%files IO-Compress
-## IO-Compress
-#%{_bindir}/zipdetails
-#%{privlib}/IO/Compress/FAQ.pod
-#%{_mandir}/man1/zipdetails.*
-#%{_mandir}/man3/IO::Compress::FAQ.*
-## Compress-Zlib
-#%{privlib}/Compress/Zlib.pm
-#%{_mandir}/man3/Compress::Zlib*
-##IO-Compress-Base
-#%{privlib}/File/GlobMapper.pm
-#%{privlib}/IO/Compress/Base/
-#%{privlib}/IO/Compress/Base.pm
-#%{privlib}/IO/Uncompress/AnyUncompress.pm
-#%{privlib}/IO/Uncompress/Base.pm
-#%{_mandir}/man3/File::GlobMapper.*
-#%{_mandir}/man3/IO::Compress::Base.*
-#%{_mandir}/man3/IO::Uncompress::AnyUncompress.*
-#%{_mandir}/man3/IO::Uncompress::Base.*
+%files IO-Compress
+# IO-Compress
+%{_bindir}/zipdetails
+%{privlib}/IO/Compress/FAQ.pod
+%{_mandir}/man1/zipdetails.*
+%{_mandir}/man3/IO::Compress::FAQ.*
+# Compress-Zlib
+%{privlib}/Compress/Zlib.pm
+%{_mandir}/man3/Compress::Zlib*
+#IO-Compress-Base
+%{privlib}/File/GlobMapper.pm
+%{privlib}/IO/Compress/Base/
+%{privlib}/IO/Compress/Base.pm
+%{privlib}/IO/Uncompress/AnyUncompress.pm
+%{privlib}/IO/Uncompress/Base.pm
+%{_mandir}/man3/File::GlobMapper.*
+%{_mandir}/man3/IO::Compress::Base.*
+%{_mandir}/man3/IO::Uncompress::AnyUncompress.*
+%{_mandir}/man3/IO::Uncompress::Base.*
 
-## IO-Compress-Zlib
-#%{privlib}/IO/Compress/Adapter/
-#%{privlib}/IO/Compress/Deflate.pm
-#%{privlib}/IO/Compress/Bzip2.pm
-#%{privlib}/IO/Compress/Gzip/
-#%{privlib}/IO/Compress/Gzip.pm
-#%{privlib}/IO/Compress/RawDeflate.pm
-#%{privlib}/IO/Compress/Zip/
-#%{privlib}/IO/Compress/Zip.pm
-#%{privlib}/IO/Compress/Zlib/
-#%{privlib}/IO/Uncompress/Adapter/
-#%{privlib}/IO/Uncompress/AnyInflate.pm
-#%{privlib}/IO/Uncompress/Bunzip2.pm
-#%{privlib}/IO/Uncompress/Gunzip.pm
-#%{privlib}/IO/Uncompress/Inflate.pm
-#%{privlib}/IO/Uncompress/RawInflate.pm
-#%{privlib}/IO/Uncompress/Unzip.pm
-#%{_mandir}/man3/IO::Compress::Deflate*
-#%{_mandir}/man3/IO::Compress::Gzip*
-#%{_mandir}/man3/IO::Compress::Bzip2*
-#%{_mandir}/man3/IO::Compress::RawDeflate*
-#%{_mandir}/man3/IO::Compress::Zip*
-#%{_mandir}/man3/IO::Uncompress::AnyInflate*
-#%{_mandir}/man3/IO::Uncompress::Bunzip2*
-#%{_mandir}/man3/IO::Uncompress::Gunzip*
-#%{_mandir}/man3/IO::Uncompress::Inflate*
-#%{_mandir}/man3/IO::Uncompress::RawInflate*
-#%{_mandir}/man3/IO::Uncompress::Unzip*
+# IO-Compress-Zlib
+%{privlib}/IO/Compress/Adapter/
+%{privlib}/IO/Compress/Deflate.pm
+%{privlib}/IO/Compress/Bzip2.pm
+%{privlib}/IO/Compress/Gzip/
+%{privlib}/IO/Compress/Gzip.pm
+%{privlib}/IO/Compress/RawDeflate.pm
+%{privlib}/IO/Compress/Zip/
+%{privlib}/IO/Compress/Zip.pm
+%{privlib}/IO/Compress/Zlib/
+%{privlib}/IO/Uncompress/Adapter/
+%{privlib}/IO/Uncompress/AnyInflate.pm
+%{privlib}/IO/Uncompress/Bunzip2.pm
+%{privlib}/IO/Uncompress/Gunzip.pm
+%{privlib}/IO/Uncompress/Inflate.pm
+%{privlib}/IO/Uncompress/RawInflate.pm
+%{privlib}/IO/Uncompress/Unzip.pm
+%{_mandir}/man3/IO::Compress::Deflate*
+%{_mandir}/man3/IO::Compress::Gzip*
+%{_mandir}/man3/IO::Compress::Bzip2*
+%{_mandir}/man3/IO::Compress::RawDeflate*
+%{_mandir}/man3/IO::Compress::Zip*
+%{_mandir}/man3/IO::Uncompress::AnyInflate*
+%{_mandir}/man3/IO::Uncompress::Bunzip2*
+%{_mandir}/man3/IO::Uncompress::Gunzip*
+%{_mandir}/man3/IO::Uncompress::Inflate*
+%{_mandir}/man3/IO::Uncompress::RawInflate*
+%{_mandir}/man3/IO::Uncompress::Unzip*
 
 %files IO-Zlib
 %{privlib}/IO/Zlib.pm
@@ -2452,13 +2218,6 @@ sed \
 %files Package-Constants
 %{privlib}/Package/
 %{_mandir}/man3/Package::Constants*
-
-#%files PathTools
-#%{archlib}/Cwd.pm
-#%{archlib}/File/Spec*
-#%{archlib}/auto/Cwd/
-#%{_mandir}/man3/Cwd*
-#%{_mandir}/man3/File::Spec*
 
 %files Params-Check
 %{privlib}/Params/

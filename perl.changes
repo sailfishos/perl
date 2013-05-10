@@ -1,3 +1,6 @@
+* Fri May 10 2013 Marko Saukko <marko.saukko@jollamobile.com> - 5.16.1
+- Fix update issues introduced by upgrade to version 5.16.1
+
 * Tue Apr 25 2013 Carsten Munk <carsten.munk@jollamobile.com> - 5.16.1
 - Rebase Vasily's upgrade
 
