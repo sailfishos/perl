@@ -1038,6 +1038,7 @@ Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        1.86
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl-threads-shared
 
 %description threads
 Since Perl 5.8, thread programming has been available using a model called
@@ -1058,6 +1059,7 @@ Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        1.40
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl-Scalar-List-Utils
 
 %description threads-shared
 By default, variables are private to each thread, and each newly created thread
