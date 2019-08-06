@@ -1,3 +1,6 @@
+* Tue Aug 06 2019 Niels Breet <niels.breet@jolla.com> - 5.16.1-2
+- Don't require groff in order to make bootstrapping easier
+
 * Fri May 10 2013 Marko Saukko <marko.saukko@jollamobile.com> - 5.16.1
 - Fix update issues introduced by upgrade to version 5.16.1
 
