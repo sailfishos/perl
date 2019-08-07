@@ -25,7 +25,7 @@
 
 Name:           perl
 Version:        %{perl_version}
-Release:        1%{?dist}
+Release:        2
 Epoch:          %{perl_epoch}
 Summary:        Practical Extraction and Report Language
 Group:          Development/Languages
@@ -86,7 +86,7 @@ Patch12:        perl-5.12.1-norebuilds.patch
 # Update some of the bundled modules
 # see http://fedoraproject.org/wiki/Perl/perl.spec for instructions
 
-BuildRequires:  groff, db4-devel, zlib-devel, bzip2-devel
+BuildRequires:  db4-devel, zlib-devel, bzip2-devel
 %if %{with gdbm}
 BuildRequires: gdbm-devel
 %endif
@@ -881,7 +881,6 @@ Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        3.17.00
 # Pod::Perldoc::ToMan executes roff
-Requires:       groff
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
 BuildArch:      noarch
 
