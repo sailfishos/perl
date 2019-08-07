@@ -1252,6 +1252,8 @@ perl regen.pl -v
 %endif
         -Di_shadow \
         -Di_syslog \
+        -Dman1dir="%{_mandir}/man1" \
+        -Dman3dir="%{_mandir}/man3" \
         -Dman3ext=3pm \
         -Duseperlio \
         -Dinstallusrbinperl=n \
@@ -1329,16 +1331,6 @@ ln -s ../../../bin/xsubpp %{build_privlib}/ExtUtils/
 
 # Don't need the .packlist
 rm %{build_archlib}/.packlist
-
-# Fix some manpages to be UTF-8
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1/
-pushd $RPM_BUILD_ROOT%{_mandir}/man1/
-  for i in perl588delta.1 perldelta.1 ; do
-    iconv -f MS-ANSI -t UTF-8 $i --output new-$i
-    rm $i
-    mv new-$i $i
-  done
-popd
 
 # Local patch tracking
 pushd %{build_archlib}/CORE/
