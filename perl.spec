@@ -18,14 +18,14 @@
 # same as we provide in /etc/rpm/macros.perl
 %global perl5_testdir   %{_libexecdir}/perl5-tests
 
-# We can bootstrap without gdbm
-%bcond_without gdbm
+# Disabling gdbm because we don't use it and it makes boostrapping easier
+%bcond_with gdbm
 # We can skip %%check phase
 %bcond_without test
 
 Name:           perl
 Version:        %{perl_version}
-Release:        2
+Release:        3
 Epoch:          %{perl_epoch}
 Summary:        Practical Extraction and Report Language
 Group:          Development/Languages
