@@ -1,4 +1,4 @@
-%global perl_version    5.16.1
+%global perl_version    5.16.3
 %global perl_epoch      2
 %global perl_arch_stem -thread-multi
 %global perl_archname %{_arch}-%{_os}%{perl_arch_stem}
@@ -25,7 +25,7 @@
 
 Name:           perl
 Version:        %{perl_version}
-Release:        3
+Release:        1
 Epoch:          %{perl_epoch}
 Summary:        Practical Extraction and Report Language
 Group:          Development/Languages
@@ -82,6 +82,11 @@ Patch11:        perl-5.12.1-notimestamps.patch
 
 Patch12:        perl-5.12.1-norebuilds.patch
 
+# Fix Errno.pm generation for gcc-5.0
+Patch13:        errno1-Fix-Errno.pm-generation-for-gcc-5.0.patch
+Patch14:        errno2-h2ph-correct-handling-of-hex-constants.patch
+Patch15:        errno3-lib-h2ph.t-to-test-generated-t-_h2ph_pre.ph.patch
+
 #
 # Update some of the bundled modules
 # see http://fedoraproject.org/wiki/Perl/perl.spec for instructions
@@ -93,6 +98,7 @@ BuildRequires: gdbm-devel
 
 # The long line of Perl provides.
 # Compat provides
+Provides: perl(:MODULE_COMPAT_5.16.3)
 Provides: perl(:MODULE_COMPAT_5.16.1)
 Provides: perl(:MODULE_COMPAT_5.16.0)
 Provides: perl(:MODULE_COMPAT_5.12.1)
@@ -1149,6 +1155,9 @@ tarball from perl.org.
 %patch10 -p1
 %patch11 -p1
 %patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
 
 #copy the example script
 cp -a %{SOURCE5} .
