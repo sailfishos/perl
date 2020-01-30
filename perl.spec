@@ -1,4 +1,4 @@
-%global perl_version    5.16.1
+%global perl_version    5.16.3
 %global perl_epoch      2
 %global perl_arch_stem -thread-multi
 %global perl_archname %{_arch}-%{_os}%{perl_arch_stem}
@@ -25,7 +25,7 @@
 
 Name:           perl
 Version:        %{perl_version}
-Release:        3
+Release:        1
 Epoch:          %{perl_epoch}
 Summary:        Practical Extraction and Report Language
 Group:          Development/Languages
@@ -93,6 +93,7 @@ BuildRequires: gdbm-devel
 
 # The long line of Perl provides.
 # Compat provides
+Provides: perl(:MODULE_COMPAT_5.16.3)
 Provides: perl(:MODULE_COMPAT_5.16.1)
 Provides: perl(:MODULE_COMPAT_5.16.0)
 Provides: perl(:MODULE_COMPAT_5.12.1)

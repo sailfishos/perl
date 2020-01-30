@@ -1,3 +1,6 @@
+* Thu Jan 30 2020 Juho Hämäläinen <juho.hamalainen@jolla.com> - 5.16.3-1
+- Update to Perl version 5.16.3.
+
 * Mon Aug 12 2019 Niels Breet <niels.breet@jolla.com> - 5.16.1-3
 - Remove gdbm support
   Fixes JB#46707
