@@ -3,13 +3,13 @@
 %global perl_arch_stem -thread-multi
 %global perl_archname %{_arch}-%{_os}%{perl_arch_stem}
 
-%global multilib_64_archs x86_64 s390x ppc64 sparc64
+%global multilib_64_archs aarch64 x86_64 s390x ppc64 sparc64
 %global parallel_tests 1
 %global tapsetdir   %{_datadir}/systemtap/tapset
 
 # This set overrides filters from build root (/etc/rpm/macros.perl)
 # intentionally (e.g. the perl(DB))
-%global __provides_exclude_from .*/auto/.*\\.so$|.*/%{perl_archlib}/.*\\.so$|%{_docdir}
+%global __provides_exclude_from .*%{_docdir}|.*%{perl_archlib}/.*\\.pl$|.*%{perl_privlib}/.*\\.pl$
 %global __requires_exclude_from %{_docdir}
 %global __provides_exclude perl\\((VMS|Win32|BSD::|DB\\)$)
 # unicore::Name - it's needed by perl, maybe problem of rpm
@@ -1345,9 +1345,9 @@ rm %{build_archlib}/.packlist
 pushd %{build_archlib}/CORE/
 %{new_perl} -x patchlevel.h \
     'Fedora Patch1: Removes date check, Fedora/RHEL specific' \
-%ifarch %{multilib_64_archs} \
+%ifarch %{multilib_64_archs}
     'Fedora Patch3: support for libdir64' \
-%endif \
+%endif
     'Fedora Patch4: use libresolv instead of libbind' \
     'Fedora Patch5: USE_MM_LD_RUN_PATH' \
     'Fedora Patch6: Skip hostname tests, due to builders not being network capable' \
