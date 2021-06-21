@@ -25,7 +25,7 @@
 
 Name:           perl
 Version:        %{perl_version}
-Release:        1
+Release:        2
 Epoch:          %{perl_epoch}
 Summary:        Practical Extraction and Report Language
 Group:          Development/Languages
@@ -1324,8 +1324,8 @@ install -p -m 644 %{SOURCE2} %{build_privlib}/Net/libnet.cfg
 #
 # perl RPM macros
 #
-mkdir -p ${RPM_BUILD_ROOT}%{_sysconfdir}/rpm
-install -p -m 644 %{SOURCE3} ${RPM_BUILD_ROOT}%{_sysconfdir}/rpm/
+mkdir -p ${RPM_BUILD_ROOT}%{_rpmmacrodir}
+install -p -m 644 %{SOURCE3} ${RPM_BUILD_ROOT}%{_rpmmacrodir}
 
 #
 # Core modules removal
@@ -1345,9 +1345,9 @@ rm %{build_archlib}/.packlist
 pushd %{build_archlib}/CORE/
 %{new_perl} -x patchlevel.h \
     'Fedora Patch1: Removes date check, Fedora/RHEL specific' \
-%ifarch %{multilib_64_archs} \
+%ifarch %{multilib_64_archs}
     'Fedora Patch3: support for libdir64' \
-%endif \
+%endif
     'Fedora Patch4: use libresolv instead of libbind' \
     'Fedora Patch5: USE_MM_LD_RUN_PATH' \
     'Fedora Patch6: Skip hostname tests, due to builders not being network capable' \
@@ -1904,7 +1904,7 @@ sed \
 %doc perl-example.stp
 
 %files macros
-%attr(0644,root,root) %{_sysconfdir}/rpm/macros.perl
+%attr(0644,root,root) %{_rpmmacrodir}/macros.perl
 
 %files tests
 %{perl5_testdir}/
