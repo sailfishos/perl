@@ -3,7 +3,7 @@
 %global perl_arch_stem -thread-multi
 %global perl_archname %{_arch}-%{_os}%{perl_arch_stem}
 
-%global multilib_64_archs x86_64 s390x ppc64 sparc64
+%global multilib_64_archs aarch64 %{power64} s390x sparc64 x86_64
 %global parallel_tests 1
 %global tapsetdir   %{_datadir}/systemtap/tapset
 
@@ -25,7 +25,7 @@
 
 Name:           perl
 Version:        %{perl_version}
-Release:        2
+Release:        3
 Epoch:          %{perl_epoch}
 Summary:        Practical Extraction and Report Language
 Group:          Development/Languages
@@ -1244,7 +1244,7 @@ perl regen.pl -v
         -Dvendorarch="%{perl_vendorarch}" \
         -Darchname=%{perl_archname} \
 %ifarch %{multilib_64_archs}
-        -Dlibpth="/usr/local/lib /lib %{_prefix}/lib" \
+        -Dlibpth="/usr/local/lib64 /lib64 %{_prefix}/lib64" \
 %endif
 %ifarch sparc sparcv9
         -Ud_longdbl \
