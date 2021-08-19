@@ -1,3 +1,6 @@
+* Thu Aug 19 2021 Björn Bidar <bjorn.bidar@jolla.com> - 5.16.3-4
+- [perl] Explicitly depend on pkgconfig(libcrypt). JB#54931
+
 * Wed Aug 18 2021 Björn Bidar <bjorn.bidar@jolla.com> - 5.16.3-3
 - Fix search libpath for 64bit arches. JB#54767 
 
@@ -71,4 +74,3 @@
 
 * Sun Nov 02 2008 Anas Nashif <anas.nashif@intel.com> 5.10.0
 - New version from fc10
-

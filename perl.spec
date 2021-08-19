@@ -25,7 +25,7 @@
 
 Name:           perl
 Version:        %{perl_version}
-Release:        3
+Release:        4
 Epoch:          %{perl_epoch}
 Summary:        Practical Extraction and Report Language
 Group:          Development/Languages
@@ -91,7 +91,9 @@ Patch15:        errno3-lib-h2ph.t-to-test-generated-t-_h2ph_pre.ph.patch
 # Update some of the bundled modules
 # see http://fedoraproject.org/wiki/Perl/perl.spec for instructions
 
-BuildRequires:  db4-devel, zlib-devel, bzip2-devel
+BuildRequires: db4-devel, bzip2-devel
+BuildRequires: pkgconfig(zlib)
+BuildRequires: pkgconfig(libcrypt))
 %if %{with gdbm}
 BuildRequires: gdbm-devel
 %endif
