@@ -1,3 +1,6 @@
+* Wed Sep  1 2021 Björn Bidar <bjorn.bidar@jolla.com> - 5.16.3-5
+- [perl] Fix typo. JB#54931
+
 * Thu Aug 19 2021 Björn Bidar <bjorn.bidar@jolla.com> - 5.16.3-4
 - [perl] Explicitly depend on pkgconfig(libcrypt). JB#54931
 
