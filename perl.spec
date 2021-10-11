@@ -25,7 +25,7 @@
 
 Name:           perl
 Version:        %{perl_version}
-Release:        6
+Release:        7
 Epoch:          %{perl_epoch}
 Summary:        Practical Extraction and Report Language
 Group:          Development/Languages
@@ -88,7 +88,7 @@ Patch14:        errno2-h2ph-correct-handling-of-hex-constants.patch
 Patch15:        errno3-lib-h2ph.t-to-test-generated-t-_h2ph_pre.ph.patch
 
 # Fix PERL#16573 PERL##16552
-Patch16:        perl5_16573_fix_build_failure_with_recent_glibc.spec
+Patch16:        perl5_16573_fix_build_failure_with_recent_glibc.patch
 
 #
 # Update some of the bundled modules
