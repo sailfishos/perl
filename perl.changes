@@ -1,3 +1,6 @@
+* Mon Oct 11 2021 Björn Bidar <bjorn.bidar@jolla.com> - 5.16.3-6
+- [perl] fix build failure with recent glibc or libxcrypt. JB#54931
+
 * Wed Sep  1 2021 Björn Bidar <bjorn.bidar@jolla.com> - 5.16.3-5
 - [perl] Fix typo. JB#54931
 
