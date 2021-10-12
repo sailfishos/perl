@@ -25,7 +25,7 @@
 
 Name:           perl
 Version:        %{perl_version}
-Release:        7
+Release:        8
 Epoch:          %{perl_epoch}
 Summary:        Practical Extraction and Report Language
 Group:          Development/Languages
@@ -197,6 +197,7 @@ Group:          Development/Languages
 License:        GPL+ or Artistic
 Requires:       perl(ExtUtils::ParseXS)
 Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       pkgconfig(libcrypt)
 
 %description devel
 This package contains header files and development modules.
