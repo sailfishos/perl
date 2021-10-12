@@ -1,3 +1,6 @@
+* Tue Oct 12 2021 Björn Bidar <bjorn.bidar@jolla.com> - 5.16.3-8
+- [perl] Require pkgconfig(libcrypt) in -devel package. JB#54931.
+
 * Mon Oct 11 2021 Björn Bidar <bjorn.bidar@jolla.com> - 5.16.3-7
 - Add missing patch file.
 
