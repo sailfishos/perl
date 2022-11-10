@@ -47,7 +47,7 @@ export PERL_MM_USE_DEFAULT=1
 # "%{?perl_default_filter}", before any %description block.
 
 %perl_default_filter %{expand: \
-%global __provides_exclude_from %{perl_vendorarch}/auto/.*\\\\.so$|%{perl_archlib}/.*\\\\.so$|%{_docdir}
+%global __provides_exclude_from %{_docdir}
 %global __requires_exclude_from %{_docdir}
 %global __provides_exclude perl\\\\(VMS|perl\\\\(Win32|perl\\\\(DB\\\\)|perl\\\\(UNIVERSAL\\\\)
 %global __requires_exclude perl\\\\(VMS|perl\\\\(Win32

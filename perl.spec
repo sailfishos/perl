@@ -1,3 +1,7 @@
+
+%global perl_privlib     %{_prefix}/share/perl5
+%global perl_archlib     %{_libdir}/perl5
+
 %global perl_version    5.16.3
 %global perl_epoch      2
 %global perl_arch_stem -thread-multi
@@ -9,7 +13,7 @@
 
 # This set overrides filters from build root (/etc/rpm/macros.perl)
 # intentionally (e.g. the perl(DB))
-%global __provides_exclude_from .*/auto/.*\\.so$|.*/%{perl_archlib}/.*\\.so$|%{_docdir}
+%global __provides_exclude_from .*%{_docdir}|.*%{perl_archlib}/.*\\.pl$|.*%{perl_privlib}/.*\\.pl$
 %global __requires_exclude_from %{_docdir}
 %global __provides_exclude perl\\((VMS|Win32|BSD::|DB\\)$)
 # unicore::Name - it's needed by perl, maybe problem of rpm
