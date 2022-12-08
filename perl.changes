@@ -1,3 +1,6 @@
+* Thu Dec 08 2022 Martin Kampas <martin.kampas@jolla.com> - 5.16.3-9
+- [perl] Ensure build reproducibility. JB#59288
+
 * Tue Oct 12 2021 Björn Bidar <bjorn.bidar@jolla.com> - 5.16.3-8
 - [perl] Require pkgconfig(libcrypt) in -devel package. JB#54931.
 
