@@ -25,7 +25,7 @@
 
 Name:           perl
 Version:        %{perl_version}
-Release:        8
+Release:        9
 Epoch:          %{perl_epoch}
 Summary:        Practical Extraction and Report Language
 Group:          Development/Languages
@@ -236,7 +236,7 @@ Summary:        Generic archive extracting mechanism
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.58
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Archive-Extract
@@ -248,7 +248,7 @@ Summary:        A module for Perl manipulation of .tar files
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        1.82 
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 Requires:       perl(Compress::Zlib), perl(IO::Zlib)
 BuildArch:      noarch
 
@@ -265,7 +265,7 @@ Summary:        Handle Common Gateway Interface requests and responses
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        3.59
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 Provides:       perl(CGI) = %{version}
 BuildArch:      noarch
 
@@ -304,7 +304,7 @@ Summary:        Low-Level Interface to the zlib compression library
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        2.048
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 
 %description Compress-Raw-Zlib
 This module provides a Perl interface to the zlib compression library.
@@ -318,7 +318,7 @@ License:        GPL+ or Artistic
 Version:        1.9800
 # CPAN encourages Digest::SHA strongly because of integrity checks
 Requires:       perl(Digest::SHA)
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 Provides:       cpan = %{version}
 BuildArch:      noarch
 
@@ -330,7 +330,7 @@ Query, download and build perl modules from CPAN sites.
 #Version:        2.120630
 #License:        GPL+ or Artistic
 #Group:          Development/Libraries
-#Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+#Requires:       perl = %{perl_epoch}:%{perl_version}
 #BuildArch:      noarch
 
 #%description CPAN-Meta
@@ -347,7 +347,7 @@ Summary:        Read and write a subset of YAML for CPAN Meta files
 License:        GPL+ or Artistic
 Group:          Development/Libraries
 BuildArch:      noarch
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 
 %description CPAN-Meta-YAML
 This module implements a subset of the YAML specification for use in reading
@@ -365,7 +365,7 @@ Version:        0.91.21
 Requires:       perl(Digest::SHA)
 Requires:       perl(Module::Pluggable) >= 2.4
 Requires:       perl(Module::CoreList)
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 Provides:       perl-CPANPLUS-Dist-Build = 0.54
 Obsoletes:      perl-CPANPLUS-Dist-Build <= 0.05
 BuildArch:      noarch
@@ -381,7 +381,7 @@ Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        1.17
 BuildArch:      noarch
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 Requires:       perl(MIME::Base64)
 
 %description Digest
@@ -397,7 +397,7 @@ Summary:        Perl extension for SHA-1/224/256/384/512
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        5.71
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 # Recommended
 Requires:       perl(Digest::base)
 Requires:       perl(MIME::Base64)
@@ -416,7 +416,7 @@ License:        GPL+ or Artistic
 # real version 0.280206 https://fedoraproject.org/wiki/Perl/Tips#Dot_approach
 Version:        0.28.2.6
 Requires:       perl-devel
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description ExtUtils-CBuilder
@@ -431,7 +431,7 @@ Group:          Development/Languages
 License:        GPL+ or Artistic
 Version:        1.30
 Requires:       perl-devel
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description ExtUtils-Embed
@@ -444,7 +444,7 @@ Group:          Development/Languages
 License:        GPL+ or Artistic
 Version:        1.58
 Requires:       perl-devel
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description ExtUtils-Install
@@ -458,7 +458,7 @@ Group:          Development/Languages
 License:        GPL+ or Artistic
 Version:        6.63.2
 Requires:       perl-devel
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 Requires:       perl(ExtUtils::Install)
 Requires:       perl(ExtUtils::Manifest)
 Requires:       perl(Test::Harness)
@@ -479,7 +479,7 @@ Group:          Development/Languages
 License:        GPL+ or Artistic
 Version:        1.61
 Requires:       perl-devel
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description ExtUtils-Manifest
@@ -492,7 +492,7 @@ Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        3.16
 Requires:       perl-devel
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description ExtUtils-ParseXS
@@ -509,7 +509,7 @@ Version:        0.32
 Requires:       perl(IPC::Cmd) >= 0.36
 Requires:       perl(Module::Load::Conditional) >= 0.04
 Requires:       perl(Params::Check) >= 0.07
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description File-Fetch
@@ -521,7 +521,7 @@ Summary:        Perl source filters
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        1.40
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 
 %description Filter
 Source filters alter the program text of a module before Perl sees it, much as
@@ -534,7 +534,7 @@ Summary:        IO::Compress wrapper for modules
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        2.048
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 Obsoletes:      perl-Compress-Zlib <= 2.020
 Provides:       perl-Compress-Zlib > 2.020
 Obsoletes:      perl-IO-Compress-Zlib <= 2.008
@@ -555,7 +555,7 @@ Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        1.10
 Requires:       perl(Compress::Zlib)
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description IO-Zlib
@@ -571,7 +571,7 @@ Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.76
 Requires:       perl(ExtUtils::MakeMaker)
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description IPC-Cmd
@@ -584,7 +584,7 @@ Summary:        A small, simple, correct HTTP/1.1 client
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.017
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 Requires:       perl(IO::Socket)
 BuildArch:      noarch
 
@@ -604,7 +604,7 @@ Version:        2.27200
 License:        GPL+ or Artistic
 Group:          Development/Libraries
 BuildArch:      noarch
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release} 
+Requires:       perl = %{perl_epoch}:%{perl_version}
 Conflicts:      perl-JSON < 2.50
 
 %description JSON-PP
@@ -618,7 +618,7 @@ Summary:        Distribution of modules to handle locale codes
 Version:        3.21
 License:        GPL+ or Artistic
 Group:          Development/Libraries
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 Requires:       perl(constant)
 Provides:       perl(Locale::Codes) = %{version}
 BuildArch:      noarch
@@ -637,7 +637,7 @@ Summary:        Simple interface to Locale::Maketext::Lexicon
 Group:          Development/Libraries
 License:        MIT
 Version:        0.21
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Locale-Maketext-Simple
@@ -650,7 +650,7 @@ Summary:        Generic message storage mechanism
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.04
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 # Add a versioned provides, since we pull the unversioned one out.
 Provides:       perl(Log::Message::Handlers) = %{version}
 BuildArch:      noarch
@@ -669,7 +669,7 @@ Summary:        Simplified frontend to Log::Message
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.08
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Log-Message-Simple
@@ -687,7 +687,7 @@ Requires:       perl(Archive::Tar) >= 1.08
 Requires:       perl(ExtUtils::CBuilder) >= 0.15
 Requires:       perl(ExtUtils::ParseXS) >= 1.02
 Requires:       perl-devel
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Module-Build
@@ -707,7 +707,7 @@ Summary:        Perl core modules indexed by perl versions
 Group:          Development/Languages
 License:        GPL+ or Artistic
 Version:        2.70
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 Requires:       perl(version)
 BuildArch:      noarch
 
@@ -722,7 +722,7 @@ Summary:        Runtime require of both modules and files
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.22
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Module-Load
@@ -735,7 +735,7 @@ Summary:        Looking up module information / loading at runtime
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.46
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Module-Load-Conditional
@@ -748,7 +748,7 @@ Summary:        Mark modules as loaded or unloaded
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.08
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Module-Loaded
@@ -765,7 +765,7 @@ Version:        1.000009
 License:        GPL+ or Artistic
 Group:          Development/Libraries
 BuildArch:      noarch
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 
 %description Module-Metadata
 Gather package and POD information from perl module files
@@ -776,7 +776,7 @@ Group:          Development/Libraries
 License:        GPL+ or Artistic
 # Keep two digit decimal part
 Version:        4.00 
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Module-Pluggable
@@ -789,7 +789,7 @@ Summary:        Perl module that allows per object accessors
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.42
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Object-Accessor
@@ -802,7 +802,7 @@ Summary:        List all constants declared in a package
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.02
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Package-Constants
@@ -816,7 +816,7 @@ Summary:        Generic input parsing/checking mechanism
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.32
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Params-Check
@@ -828,7 +828,7 @@ Summary:        Parse META.yml and other similar CPAN metadata files
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        1.4402
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 Requires:       perl(CPAN::Meta::YAML) >= 0.002
 Requires:       perl(JSON::PP) >= 2.27103
@@ -845,7 +845,7 @@ Summary:        Map Perl operating system names to generic types
 Version:        1.002
 License:        GPL+ or Artistic
 Group:          Development/Libraries
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Perl-OSType
@@ -863,7 +863,7 @@ Summary:        Perl module for resolving POD escape sequences
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        1.04
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Pod-Escapes
@@ -876,7 +876,7 @@ Summary:        Basic perl modules for handling Plain Old Documentation (POD)
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        1.51
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 # Pod::Usage executes perldoc from perl-Pod-Perldoc by default
 Requires:       perl-Pod-Perldoc
 BuildArch:      noarch
@@ -893,7 +893,7 @@ Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        3.17.00
 # Pod::Perldoc::ToMan executes roff
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Pod-Perldoc
@@ -908,7 +908,7 @@ Summary:        Framework for parsing POD documentation
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        3.20
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Pod-Simple
@@ -922,7 +922,7 @@ Summary:        A selection of general-utility scalar and list subroutines
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        1.25
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 
 %description Scalar-List-Utils
 Scalar::Util and List::Util contain a selection of subroutines that people have
@@ -936,7 +936,7 @@ Summary:        Term::ReadLine UI made easy
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.30
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 Requires:       perl(Log::Message::Simple)
 BuildArch:      noarch
 
@@ -952,7 +952,7 @@ Group:          Development/Languages
 License:        GPL+ or Artistic
 Version:        3.23
 Requires:       perl-devel
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 # Use rewritten module perl-Test-Harness
 Provides:       perl-TAP-Harness = 3.17
@@ -969,7 +969,7 @@ Group:          Development/Languages
 License:        GPL+ or Artistic
 Version:        0.98
 Requires:       perl-devel
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 #Requires:       perl(Data::Dumper)
 BuildArch:      noarch
 
@@ -997,7 +997,7 @@ Group:          Development/Libraries
 License:        GPL+ or Artistic
 # real 1.20_01
 Version:        1.20.1
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 
 %description Time-Piece
 The Time::Piece module replaces the standard localtime and gmtime functions
@@ -1011,7 +1011,7 @@ Summary:        Establish an ISA relationship with base classes at compile time
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.225
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description parent
@@ -1033,7 +1033,7 @@ Summary:        C socket.h defines and structure manipulators
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        2.001
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 
 %description Socket
 This module is just a translation of the C socket.h file.  Unlike the old
@@ -1048,7 +1048,7 @@ Summary:        Perl interpreter-based threads
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        1.86
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 
 %description threads
 Since Perl 5.8, thread programming has been available using a model called
@@ -1068,7 +1068,7 @@ Summary:        Perl extension for sharing data structures between threads
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        1.40
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 
 %description threads-shared
 By default, variables are private to each thread, and each newly created thread
@@ -1084,7 +1084,7 @@ Summary:        Perl extension for Version Objects
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Version:        0.99
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description version
@@ -1096,7 +1096,7 @@ Summary:        Set of version requirements for a CPAN dist
 License:        GPL+ or Artistic
 Group:          Development/Libraries
 Version:        0.101022
-Requires:       perl = %{perl_epoch}:%{perl_version}-%{release}
+Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
 %description Version-Requirements
