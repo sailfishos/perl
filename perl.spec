@@ -1268,8 +1268,8 @@ perl regen.pl -v
 %endif
         -Di_shadow \
         -Di_syslog \
-        -Dman1dir="%{_mandir}/man1" \
-        -Dman3dir="%{_mandir}/man3" \
+        -Dman1dir=none \
+        -Dman3dir=none \
         -Dman3ext=3pm \
         -Duseperlio \
         -Dinstallusrbinperl=n \
