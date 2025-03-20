@@ -325,15 +325,15 @@ BuildArch:      noarch
 %description CPAN
 Query, download and build perl modules from CPAN sites.
 
-#%package CPAN-Meta
+#%%package CPAN-Meta
 #Summary:        Distribution metadata for a CPAN dist
 #Version:        2.120630
 #License:        GPL+ or Artistic
 #Group:          Development/Libraries
-#Requires:       perl = %{perl_epoch}:%{perl_version}
+#Requires:       perl = %%{perl_epoch}:%%{perl_version}
 #BuildArch:      noarch
 
-#%description CPAN-Meta
+#%%description CPAN-Meta
 #Software distributions released to the CPAN include a META.json or, for
 #older distributions, META.yml, which describes the distribution, its
 #contents, and the requirements for building and installing the
@@ -1202,11 +1202,11 @@ rm -rf cpan/Compress-Raw-Zlib/zlib-src
 rm -rf cpan/Compress-Raw-Bzip2/bzip2-src
 sed -i '/\(bzip2\|zlib\)-src/d' MANIFEST
 
-#%if !%{with gdbm}
+#%%if !%%{with gdbm}
 # Do not install anything requiring NDBM_File if NDBM is not available.
 rm -rf 'cpan/Memoize/Memoize/NDBM_File.pm'
 sed -i '\|cpan/Memoize/Memoize/NDBM_File.pm|d' MANIFEST
-#%endif
+#%%endif
 
 %build
 echo "RPM Build arch: %{_arch}"
@@ -1268,8 +1268,8 @@ perl regen.pl -v
 %endif
         -Di_shadow \
         -Di_syslog \
-        -Dman1dir="%{_mandir}/man1" \
-        -Dman3dir="%{_mandir}/man3" \
+        -Dman1dir=none \
+        -Dman3dir=none \
         -Dman3ext=3pm \
         -Duseperlio \
         -Dinstallusrbinperl=n \
@@ -1439,8 +1439,6 @@ sed \
 
 %files
 %doc Artistic AUTHORS Copying README Changes
-%{_mandir}/man1/*.1*
-%{_mandir}/man3/*.3*
 %{_bindir}/*
 %{privlib}
 %{archlib}
@@ -1453,20 +1451,14 @@ sed \
 
 # devel
 %exclude %{_bindir}/enc2xs
-%exclude %{_mandir}/man1/enc2xs*
 %exclude %{privlib}/Encode/
 %exclude %{_bindir}/h2xs
-%exclude %{_mandir}/man1/h2xs*
 %exclude %{_bindir}/libnetcfg
-%exclude %{_mandir}/man1/libnetcfg*
 %exclude %{_bindir}/perlivp
-%exclude %{_mandir}/man1/perlivp*
 %exclude %{archlib}/CORE/*.h
-%exclude %{_mandir}/man1/perlxs*
 
 # Archive-Extract
 %exclude %{privlib}/Archive/Extract.pm
-%exclude %{_mandir}/man3/Archive::Extract.3*
 
 # Archive-Tar
 %exclude %{_bindir}/ptar
@@ -1474,34 +1466,23 @@ sed \
 %exclude %{_bindir}/ptargrep
 %exclude %{privlib}/Archive/Tar/
 %exclude %{privlib}/Archive/Tar.pm
-%exclude %{_mandir}/man1/ptar.1*
-%exclude %{_mandir}/man1/ptardiff.1*
-%exclude %{_mandir}/man1/ptargrep.1*
-%exclude %{_mandir}/man3/Archive::Tar*
 
 # CGI
 %exclude %{privlib}/CGI/
 %exclude %{privlib}/CGI.pm
-%exclude %{_mandir}/man3/CGI.3*
-%exclude %{_mandir}/man3/CGI::*.3*
 
 # CPAN
 %exclude %{_bindir}/cpan
 %exclude %{privlib}/CPAN/
 %exclude %{privlib}/CPAN.pm
-%exclude %{_mandir}/man1/cpan.1*
-%exclude %{_mandir}/man3/CPAN.*
-%exclude %{_mandir}/man3/CPAN:*
 
 # CPAN-Meta-YAML
 %exclude %{privlib}/CPAN/Meta/YAML.pm
-%exclude %{_mandir}/man3/CPAN::Meta::YAML*
 
 # Parse-CPAN-Meta
 %exclude %dir %{privlib}/Parse/
 %exclude %dir %{privlib}/Parse/CPAN/
 %exclude %{privlib}/Parse/CPAN/Meta.pm
-%exclude %{_mandir}/man3/Parse::CPAN::Meta.3*
 
 # CPANPLUS
 %exclude %{_bindir}/cpan2dist
@@ -1509,59 +1490,43 @@ sed \
 %exclude %{_bindir}/cpanp-run-perl
 %exclude %{privlib}/CPANPLUS/
 %exclude %{privlib}/CPANPLUS.pm
-%exclude %{_mandir}/man1/cpan2dist.1*
-%exclude %{_mandir}/man1/cpanp.1*
-%exclude %{_mandir}/man3/CPANPLUS*
 
 # Compress-Raw-Bzip2
 %exclude %dir %{archlib}/Compress
 %exclude %{archlib}/Compress/Raw/Bzip2.pm
-%exclude %{_mandir}/man3/Compress::Raw::Bzip2*
 
 # Compress::Raw::Zlib
 %exclude %{archlib}/Compress/Raw/
 %exclude %{archlib}/auto/Compress
 %exclude %{archlib}/auto/Compress/Raw/
 %exclude %{archlib}/auto/Compress/Raw/Zlib/
-%exclude %{_mandir}/man3/Compress::Raw::Zlib*
 
 # Digest
 %exclude %{privlib}/Digest.pm
 %exclude %dir %{privlib}/Digest
 %exclude %{privlib}/Digest/base.pm
 %exclude %{privlib}/Digest/file.pm
-%exclude %{_mandir}/man3/Digest.3*
-%exclude %{_mandir}/man3/Digest::base.3*
-%exclude %{_mandir}/man3/Digest::file.3*
 
 # Digest::SHA
 %exclude %{_bindir}/shasum
 %exclude %{archlib}/Digest/SHA.pm
 %exclude %{archlib}/auto/Digest/SHA/
-%exclude %{_mandir}/man1/shasum.1*
-%exclude %{_mandir}/man3/Digest::SHA.3*
 
 # ExtUtils::CBuilder
 %exclude %{privlib}/ExtUtils/CBuilder/
 %exclude %{privlib}/ExtUtils/CBuilder.pm
-%exclude %{_mandir}/man3/ExtUtils::CBuilder*
 
 # ExtUtils::Embed
 %exclude %{privlib}/ExtUtils/Embed.pm
-%exclude %{_mandir}/man3/ExtUtils::Embed*
 
 # ExtUtils::Install
 %exclude %{privlib}/ExtUtils/Install.pm
 %exclude %{privlib}/ExtUtils/Installed.pm
 %exclude %{privlib}/ExtUtils/Packlist.pm
-%exclude %{_mandir}/man3/ExtUtils::Install.3*
-%exclude %{_mandir}/man3/ExtUtils::Installed.3*
-%exclude %{_mandir}/man3/ExtUtils::Packlist.3*
 
 # ExtUtils::Manifest
 %exclude %{privlib}/ExtUtils/Manifest.pm
 %exclude %{privlib}/ExtUtils/MANIFEST.SKIP
-%exclude %{_mandir}/man3/ExtUtils::Manifest.3*
 
 # ExtUtils::MakeMaker
 %exclude %{_bindir}/instmodsh
@@ -1575,15 +1540,6 @@ sed \
 %exclude %{privlib}/ExtUtils/Mkbootstrap.pm
 %exclude %{privlib}/ExtUtils/Mksymlists.pm
 %exclude %{privlib}/ExtUtils/testlib.pm
-%exclude %{_mandir}/man1/instmodsh.1*
-%exclude %{_mandir}/man3/ExtUtils::Command::MM*
-%exclude %{_mandir}/man3/ExtUtils::Liblist.3*
-%exclude %{_mandir}/man3/ExtUtils::MM*
-%exclude %{_mandir}/man3/ExtUtils::MY.3*
-%exclude %{_mandir}/man3/ExtUtils::MakeMaker*
-%exclude %{_mandir}/man3/ExtUtils::Mkbootstrap.3*
-%exclude %{_mandir}/man3/ExtUtils::Mksymlists.3*
-%exclude %{_mandir}/man3/ExtUtils::testlib.3*
 
 # ExtUtils::ParseXS
 %exclude %dir %{privlib}/ExtUtils/ParseXS/
@@ -1600,45 +1556,26 @@ sed \
 %exclude %{privlib}/ExtUtils/Typemaps/Type.pm
 %exclude %{privlib}/ExtUtils/xsubpp
 %exclude %{_bindir}/xsubpp
-%exclude %{_mandir}/man1/xsubpp*
-%exclude %{_mandir}/man3/ExtUtils::ParseXS.3*
-%exclude %{_mandir}/man3/ExtUtils::ParseXS::Constants.3*
-%exclude %{_mandir}/man3/ExtUtils::ParseXS::Utilities.3*
-%exclude %{_mandir}/man3/ExtUtils::Typemaps.3*
-%exclude %{_mandir}/man3/ExtUtils::Typemaps::Cmd.3*
-%exclude %{_mandir}/man3/ExtUtils::Typemaps::InputMap.3*
-%exclude %{_mandir}/man3/ExtUtils::Typemaps::OutputMap.3*
-%exclude %{_mandir}/man3/ExtUtils::Typemaps::Type.3*
 
 # File::Fetch
 %exclude %{privlib}/File/Fetch.pm
-%exclude %{_mandir}/man3/File::Fetch.3*
 
 # Filter
 %exclude %{archlib}/auto/Filter/Util
 %exclude %{archlib}/Filter/Util
 %exclude %{privlib}/pod/perlfilter.pod
-%exclude %{_mandir}/man1/perlfilter.*
-%exclude %{_mandir}/man3/Filter::Util::*
 
 # IO-Compress
 %exclude %{_bindir}/zipdetails
 %exclude %{privlib}/IO/Compress/FAQ.pod
-%exclude %{_mandir}/man1/zipdetails.*
-%exclude %{_mandir}/man3/IO::Compress::FAQ.*
 # Compress-Zlib
 %exclude %{privlib}/Compress/Zlib.pm
-%exclude %{_mandir}/man3/Compress::Zlib*
 # IO-Compress-Base
 %exclude %{privlib}/File/GlobMapper.pm
 %exclude %{privlib}/IO/Compress/Base/
 %exclude %{privlib}/IO/Compress/Base.pm
 %exclude %{privlib}/IO/Uncompress/AnyUncompress.pm
 %exclude %{privlib}/IO/Uncompress/Base.pm
-%exclude %{_mandir}/man3/File::GlobMapper.*
-%exclude %{_mandir}/man3/IO::Compress::Base.*
-%exclude %{_mandir}/man3/IO::Uncompress::AnyUncompress.*
-%exclude %{_mandir}/man3/IO::Uncompress::Base.*
 # IO-Compress-Zlib
 %exclude %{privlib}/IO/Compress/Adapter/
 %exclude %{privlib}/IO/Compress/Deflate.pm
@@ -1656,37 +1593,20 @@ sed \
 %exclude %{privlib}/IO/Uncompress/Inflate.pm
 %exclude %{privlib}/IO/Uncompress/RawInflate.pm
 %exclude %{privlib}/IO/Uncompress/Unzip.pm
-%exclude %{_mandir}/man3/IO::Compress::Deflate*
-%exclude %{_mandir}/man3/IO::Compress::Bzip2*
-%exclude %{_mandir}/man3/IO::Compress::Gzip*
-%exclude %{_mandir}/man3/IO::Compress::RawDeflate*
-%exclude %{_mandir}/man3/IO::Compress::Zip*
-%exclude %{_mandir}/man3/IO::Uncompress::AnyInflate*
-%exclude %{_mandir}/man3/IO::Uncompress::Bunzip2*
-%exclude %{_mandir}/man3/IO::Uncompress::Gunzip*
-%exclude %{_mandir}/man3/IO::Uncompress::Inflate*
-%exclude %{_mandir}/man3/IO::Uncompress::RawInflate*
-%exclude %{_mandir}/man3/IO::Uncompress::Unzip*
 
 # IO::Zlib
 %exclude %{privlib}/IO/Zlib.pm
-%exclude %{_mandir}/man3/IO::Zlib.*
 
 # HTTP::Tiny
 %exclude %{privlib}/HTTP/Tiny.pm
-%exclude %{_mandir}/man3/HTTP::Tiny*
 
 # IPC::Cmd
 %exclude %{privlib}/IPC/Cmd.pm
-%exclude %{_mandir}/man3/IPC::Cmd.3*
 
 # JSON::PP
 %exclude %{_bindir}/json_pp
 %exclude %{privlib}/JSON/PP
 %exclude %{privlib}/JSON/PP.pm
-%exclude %{_mandir}/man1/json_pp.1*
-%exclude %{_mandir}/man3/JSON::PP.3*
-%exclude %{_mandir}/man3/JSON::PP::Boolean.3pm*
 
 # Locale::Codes
 %exclude %{privlib}/Locale/Codes
@@ -1695,92 +1615,63 @@ sed \
 %exclude %{privlib}/Locale/Currency.*
 %exclude %{privlib}/Locale/Language.*
 %exclude %{privlib}/Locale/Script.*
-%exclude %{_mandir}/man3/Locale::Codes::*
-%exclude %{_mandir}/man3/Locale::Codes.*
-%exclude %{_mandir}/man3/Locale::Country.*
-%exclude %{_mandir}/man3/Locale::Currency.*
-%exclude %{_mandir}/man3/Locale::Language.*
-%exclude %{_mandir}/man3/Locale::Script.*
 
 # Locale::Maketext::Simple
 %exclude %{privlib}/Locale/Maketext/Simple.pm
-%exclude %{_mandir}/man3/Locale::Maketext::Simple.*
 
 # Log::Message
 %exclude %{privlib}/Log/Message.pm
 %exclude %{privlib}/Log/Message/Config.pm
 %exclude %{privlib}/Log/Message/Handlers.pm
 %exclude %{privlib}/Log/Message/Item.pm
-%exclude %{_mandir}/man3/Log::Message.3*
-%exclude %{_mandir}/man3/Log::Message::Config.3*
-%exclude %{_mandir}/man3/Log::Message::Handlers.3*
-%exclude %{_mandir}/man3/Log::Message::Item.3*
 
 # Log::Message::Simple
 %exclude %{privlib}/Log/Message/Simple.pm
-%exclude %{_mandir}/man3/Log::Message::Simple.3*
 
 # Module::Build
 %exclude %{_bindir}/config_data
 %exclude %{privlib}/inc/
 %exclude %{privlib}/Module/Build/
 %exclude %{privlib}/Module/Build.pm
-%exclude %{_mandir}/man1/config_data.1*
-%exclude %{_mandir}/man3/Module::Build*
-%exclude %{_mandir}/man3/inc::latest.3*
 
 # Module-CoreList
 %exclude %{_bindir}/corelist
 %exclude %{privlib}/Module/CoreList.pm
-%exclude %{_mandir}/man1/corelist*
-%exclude %{_mandir}/man3/Module::CoreList*
 
 # Module-Load
 %exclude %{privlib}/Module/Load.pm
-%exclude %{_mandir}/man3/Module::Load.*
 
 # Module-Load-Conditional
 %exclude %{privlib}/Module/Load/
-%exclude %{_mandir}/man3/Module::Load::Conditional*
 
 # Module-Loaded
 %exclude %{privlib}/Module/Loaded.pm
-%exclude %{_mandir}/man3/Module::Loaded*
 
 # Module-Metadata
 %exclude %{privlib}/Module/Metadata.pm
-%exclude %{_mandir}/man3/Module::Metadata.3pm*
 
 # Module-Pluggable
 %exclude %{privlib}/Devel/InnerPackage.pm
 %exclude %{privlib}/Module/Pluggable/
 %exclude %{privlib}/Module/Pluggable.pm
-%exclude %{_mandir}/man3/Devel::InnerPackage*
-%exclude %{_mandir}/man3/Module::Pluggable*
 
 # Object-Accessor
 %exclude %{privlib}/Object/
-%exclude %{_mandir}/man3/Object::Accessor*
 
 # Package-Constants
 %exclude %{privlib}/Package/
-%exclude %{_mandir}/man3/Package::Constants*
 
 # Params-Check
 %exclude %{privlib}/Params/
-%exclude %{_mandir}/man3/Params::Check*
 
 # Perl-OSType
 %exclude %{privlib}/Perl/OSType.pm
-%exclude %{_mandir}/man3/Perl::OSType.3pm*
 
 # parent
 %exclude %{privlib}/parent.pm
-%exclude %{_mandir}/man3/parent.3*
 
 # Pod-Escapes
 %exclude %{privlib}/Pod/Escapes.pm
-%exclude %{_mandir}/man3/Pod::Escapes.*
 
 # Pod-Parser
 %exclude %{_bindir}/pod2usage
@@ -1794,99 +1685,66 @@ sed \
 %exclude %{privlib}/Pod/PlainText.pm
 %exclude %{privlib}/Pod/Select.pm
 %exclude %{privlib}/Pod/Usage.pm
-%exclude %{_mandir}/man1/pod2usage.1*
-%exclude %{_mandir}/man1/podchecker.1*
-%exclude %{_mandir}/man1/podselect.1*
-%exclude %{_mandir}/man3/Pod::Checker.*
-%exclude %{_mandir}/man3/Pod::Find.*
-%exclude %{_mandir}/man3/Pod::InputObjects.*
-%exclude %{_mandir}/man3/Pod::ParseUtils.*
-%exclude %{_mandir}/man3/Pod::Parser.*
-%exclude %{_mandir}/man3/Pod::PlainText.*
-%exclude %{_mandir}/man3/Pod::Select.*
-%exclude %{_mandir}/man3/Pod::Usage.*
 
 # Pod-Perldoc
 %exclude %{_bindir}/perldoc
 %exclude %{privlib}/pod/perldoc.pod
 %exclude %{privlib}/Pod/Perldoc.pm
 %exclude %{privlib}/Pod/Perldoc/
-%exclude %{_mandir}/man1/perldoc.1*
-%exclude %{_mandir}/man3/Pod::Perldoc*
 
 # Pod-Simple
 %exclude %{privlib}/Pod/Simple/
 %exclude %{privlib}/Pod/Simple.pm
 %exclude %{privlib}/Pod/Simple.pod
-%exclude %{_mandir}/man3/Pod::Simple*
 
 # Scalar-List-Utils
 %exclude %{archlib}/List/
 %exclude %{archlib}/Scalar/
 %exclude %{archlib}/auto/List/
-%exclude %{_mandir}/man3/List::Util*
-%exclude %{_mandir}/man3/Scalar::Util*
 
 # Term-UI
 %exclude %{privlib}/Term/UI.pm
 %exclude %{privlib}/Term/UI/
-%exclude %{_mandir}/man3/Term::UI*
 
 # Test::Harness
 %exclude %{_bindir}/prove
 %exclude %{privlib}/App*
 %exclude %{privlib}/TAP*
 %exclude %{privlib}/Test/Harness*
-%exclude %{_mandir}/man1/prove.1*
-%exclude %{_mandir}/man3/App*
-%exclude %{_mandir}/man3/TAP*
-%exclude %{_mandir}/man3/Test::Harness*
 
 # Test::Simple
 %exclude %{privlib}/Test/More*
 %exclude %{privlib}/Test/Builder*
 %exclude %{privlib}/Test/Simple*
 %exclude %{privlib}/Test/Tutorial*
-%exclude %{_mandir}/man3/Test::More*
-%exclude %{_mandir}/man3/Test::Builder*
-%exclude %{_mandir}/man3/Test::Simple*
-%exclude %{_mandir}/man3/Test::Tutorial*
 
 # Time::Piece
 %exclude %{archlib}/Time/Piece.pm
 %exclude %{archlib}/Time/Seconds.pm
 %exclude %{archlib}/auto/Time/Piece/
-%exclude %{_mandir}/man3/Time::Piece.3*
-%exclude %{_mandir}/man3/Time::Seconds.3*
 
 # Version-Requirements
 %exclude %{privlib}/Version/Requirements.pm
-%exclude %{_mandir}/man3/Version::Requirements*
 
 # Socket
 %exclude %dir %{archlib}/auto/Socket
 %exclude %{archlib}/auto/Socket/Socket.*
 %exclude %{archlib}/Socket.pm
-%exclude %{_mandir}/man3/Socket.3*
 
 # threads
 %dir %exclude %{archlib}/auto/threads
 %exclude %{archlib}/auto/threads/threads*
 %exclude %{archlib}/threads.pm
-%exclude %{_mandir}/man3/threads.3*
 
 # threads-shared
 %exclude %{archlib}/auto/threads/shared*
 %exclude %dir %{archlib}/threads
 %exclude %{archlib}/threads/shared*
-%exclude %{_mandir}/man3/threads::shared*
 
 # version
 %exclude %{privlib}/version.pm
 %exclude %{privlib}/version.pod
 %exclude %{privlib}/version/
-%exclude %{_mandir}/man3/version.3*
-%exclude %{_mandir}/man3/version::Internals.3*
 
 %files libs
 %defattr(-,root,root)
@@ -1897,16 +1755,11 @@ sed \
 
 %files devel
 %{_bindir}/enc2xs
-%{_mandir}/man1/enc2xs*
 %{privlib}/Encode/
 %{_bindir}/h2xs
-%{_mandir}/man1/h2xs*
 %{_bindir}/libnetcfg
-%{_mandir}/man1/libnetcfg*
 %{_bindir}/perlivp
-%{_mandir}/man1/perlivp*
 %{archlib}/CORE/*.h
-%{_mandir}/man1/perlxs*
 %{tapsetdir}/%{libperl_stp}
 %doc perl-example.stp
 
@@ -1919,7 +1772,6 @@ sed \
 
 %files Archive-Extract
 %{privlib}/Archive/Extract.pm
-%{_mandir}/man3/Archive::Extract.3*
 
 %files Archive-Tar
 %{_bindir}/ptar
@@ -1927,16 +1779,10 @@ sed \
 %{_bindir}/ptargrep
 %{privlib}/Archive/Tar/ 
 %{privlib}/Archive/Tar.pm
-%{_mandir}/man1/ptar.1*
-%{_mandir}/man1/ptardiff.1*
-%{_mandir}/man1/ptargrep.1*
-%{_mandir}/man3/Archive::Tar* 
 
 %files CGI
 %{privlib}/CGI/
 %{privlib}/CGI.pm
-%{_mandir}/man3/CGI.3*
-%{_mandir}/man3/CGI::*.3*
 
 %files Compress-Raw-Bzip2
 %dir %{archlib}/Compress
@@ -1945,7 +1791,6 @@ sed \
 %dir %{archlib}/auto/Compress/
 %dir %{archlib}/auto/Compress/Raw/
 %{archlib}/auto/Compress/Raw/Bzip2/
-%{_mandir}/man3/Compress::Raw::Bzip2*
 
 %files Compress-Raw-Zlib
 %dir %{archlib}/Compress
@@ -1954,22 +1799,16 @@ sed \
 %dir %{archlib}/auto/Compress/
 %dir %{archlib}/auto/Compress/Raw/
 %{archlib}/auto/Compress/Raw/Zlib/
-%{_mandir}/man3/Compress::Raw::Zlib*
 
 %files CPAN
 %{_bindir}/cpan
 %{privlib}/CPAN/
 %{privlib}/CPAN.pm
-%{_mandir}/man1/cpan.1*
-%{_mandir}/man3/CPAN.*
-%{_mandir}/man3/CPAN:*
 %exclude %{privlib}/CPAN/Meta/
 %exclude %{privlib}/CPAN/Meta.pm
-%exclude %{_mandir}/man3/CPAN::Meta*
 
 %files CPAN-Meta-YAML
 %{privlib}/CPAN/Meta/YAML.pm
-%{_mandir}/man3/CPAN::Meta::YAML*
 
 %files CPANPLUS
 %{_bindir}/cpan2dist
@@ -1977,48 +1816,34 @@ sed \
 %{_bindir}/cpanp-run-perl
 %{privlib}/CPANPLUS/
 %{privlib}/CPANPLUS.pm
-%{_mandir}/man1/cpan2dist.1*
-%{_mandir}/man1/cpanp.1*
-%{_mandir}/man3/CPANPLUS*
 
 %files Digest
 %{privlib}/Digest.pm
 %dir %{privlib}/Digest
 %{privlib}/Digest/base.pm
 %{privlib}/Digest/file.pm
-%{_mandir}/man3/Digest.3*
-%{_mandir}/man3/Digest::base.3*
-%{_mandir}/man3/Digest::file.3*
 
 %files Digest-SHA
 %{_bindir}/shasum
 %dir %{archlib}/Digest/
 %{archlib}/Digest/SHA.pm
 %{archlib}/auto/Digest/SHA/
-%{_mandir}/man1/shasum.1*
-%{_mandir}/man3/Digest::SHA.3*
 
 %files ExtUtils-CBuilder
 %{privlib}/ExtUtils/CBuilder/
 %{privlib}/ExtUtils/CBuilder.pm
-%{_mandir}/man3/ExtUtils::CBuilder*
 
 %files ExtUtils-Embed
 %{privlib}/ExtUtils/Embed.pm
-%{_mandir}/man3/ExtUtils::Embed*
 
 %files ExtUtils-Install
 %{privlib}/ExtUtils/Install.pm
 %{privlib}/ExtUtils/Installed.pm
 %{privlib}/ExtUtils/Packlist.pm
-%{_mandir}/man3/ExtUtils::Install.3*
-%{_mandir}/man3/ExtUtils::Installed.3*
-%{_mandir}/man3/ExtUtils::Packlist.3*
 
 %files ExtUtils-Manifest
 %{privlib}/ExtUtils/Manifest.pm
 %{privlib}/ExtUtils/MANIFEST.SKIP
-%{_mandir}/man3/ExtUtils::Manifest.3*
 
 %files ExtUtils-MakeMaker
 %{_bindir}/instmodsh
@@ -2032,15 +1857,6 @@ sed \
 %{privlib}/ExtUtils/Mkbootstrap.pm
 %{privlib}/ExtUtils/Mksymlists.pm
 %{privlib}/ExtUtils/testlib.pm
-%{_mandir}/man1/instmodsh.1*
-%{_mandir}/man3/ExtUtils::Command::MM*
-%{_mandir}/man3/ExtUtils::Liblist.3*
-%{_mandir}/man3/ExtUtils::MM*
-%{_mandir}/man3/ExtUtils::MY.3*
-%{_mandir}/man3/ExtUtils::MakeMaker*
-%{_mandir}/man3/ExtUtils::Mkbootstrap.3*
-%{_mandir}/man3/ExtUtils::Mksymlists.3*
-%{_mandir}/man3/ExtUtils::testlib.3*
 
 %files ExtUtils-ParseXS
 %dir %{privlib}/ExtUtils/ParseXS/
@@ -2057,46 +1873,27 @@ sed \
 %{privlib}/ExtUtils/Typemaps/Type.pm
 %{privlib}/ExtUtils/xsubpp
 %{_bindir}/xsubpp
-%{_mandir}/man1/xsubpp*
-%{_mandir}/man3/ExtUtils::ParseXS.3*
-%{_mandir}/man3/ExtUtils::ParseXS::Constants.3*
-%{_mandir}/man3/ExtUtils::ParseXS::Utilities.3*
-%{_mandir}/man3/ExtUtils::Typemaps.3*
-%{_mandir}/man3/ExtUtils::Typemaps::Cmd.3*
-%{_mandir}/man3/ExtUtils::Typemaps::InputMap.3*
-%{_mandir}/man3/ExtUtils::Typemaps::OutputMap.3*
-%{_mandir}/man3/ExtUtils::Typemaps::Type.3*
 
 %files File-Fetch
 %{privlib}/File/Fetch.pm
-%{_mandir}/man3/File::Fetch.3*
 
 %files Filter
 %{archlib}/auto/Filter/Util
 %{archlib}/Filter/Util
 %{privlib}/pod/perlfilter.pod
-%{_mandir}/man1/perlfilter.*
-%{_mandir}/man3/Filter::Util::*
 
 %files IO-Compress
 # IO-Compress
 %{_bindir}/zipdetails
 %{privlib}/IO/Compress/FAQ.pod
-%{_mandir}/man1/zipdetails.*
-%{_mandir}/man3/IO::Compress::FAQ.*
 # Compress-Zlib
 %{privlib}/Compress/Zlib.pm
-%{_mandir}/man3/Compress::Zlib*
 #IO-Compress-Base
 %{privlib}/File/GlobMapper.pm
 %{privlib}/IO/Compress/Base/
 %{privlib}/IO/Compress/Base.pm
 %{privlib}/IO/Uncompress/AnyUncompress.pm
 %{privlib}/IO/Uncompress/Base.pm
-%{_mandir}/man3/File::GlobMapper.*
-%{_mandir}/man3/IO::Compress::Base.*
-%{_mandir}/man3/IO::Uncompress::AnyUncompress.*
-%{_mandir}/man3/IO::Uncompress::Base.*
 
 # IO-Compress-Zlib
 %{privlib}/IO/Compress/Adapter/
@@ -2115,37 +1912,20 @@ sed \
 %{privlib}/IO/Uncompress/Inflate.pm
 %{privlib}/IO/Uncompress/RawInflate.pm
 %{privlib}/IO/Uncompress/Unzip.pm
-%{_mandir}/man3/IO::Compress::Deflate*
-%{_mandir}/man3/IO::Compress::Gzip*
-%{_mandir}/man3/IO::Compress::Bzip2*
-%{_mandir}/man3/IO::Compress::RawDeflate*
-%{_mandir}/man3/IO::Compress::Zip*
-%{_mandir}/man3/IO::Uncompress::AnyInflate*
-%{_mandir}/man3/IO::Uncompress::Bunzip2*
-%{_mandir}/man3/IO::Uncompress::Gunzip*
-%{_mandir}/man3/IO::Uncompress::Inflate*
-%{_mandir}/man3/IO::Uncompress::RawInflate*
-%{_mandir}/man3/IO::Uncompress::Unzip*
 
 %files IO-Zlib
 %{privlib}/IO/Zlib.pm
-%{_mandir}/man3/IO::Zlib.*
 
 %files HTTP-Tiny
 %{privlib}/HTTP/Tiny.pm
-%{_mandir}/man3/HTTP::Tiny*
 
 %files IPC-Cmd
 %{privlib}/IPC/Cmd.pm
-%{_mandir}/man3/IPC::Cmd.3*
 
 %files JSON-PP
 %{_bindir}/json_pp
 %{privlib}/JSON/PP
 %{privlib}/JSON/PP.pm
-%{_mandir}/man1/json_pp.1*
-%{_mandir}/man3/JSON::PP.3*
-%{_mandir}/man3/JSON::PP::Boolean.3pm*
 
 %files Locale-Codes
 %{privlib}/Locale/Codes
@@ -2154,99 +1934,69 @@ sed \
 %{privlib}/Locale/Currency.*
 %{privlib}/Locale/Language.*
 %{privlib}/Locale/Script.*
-%{_mandir}/man3/Locale::Codes::*
-%{_mandir}/man3/Locale::Codes.*
-%{_mandir}/man3/Locale::Country.*
-%{_mandir}/man3/Locale::Currency.*
-%{_mandir}/man3/Locale::Language.*
-%{_mandir}/man3/Locale::Script.*
 
 %files Locale-Maketext-Simple
 %{privlib}/Locale/Maketext/Simple.pm
-%{_mandir}/man3/Locale::Maketext::Simple.*
 
 %files Log-Message
 %{privlib}/Log/Message.pm
 %{privlib}/Log/Message/Config.pm
 %{privlib}/Log/Message/Handlers.pm
 %{privlib}/Log/Message/Item.pm
-%{_mandir}/man3/Log::Message.3*
-%{_mandir}/man3/Log::Message::Config.3*
-%{_mandir}/man3/Log::Message::Handlers.3*
-%{_mandir}/man3/Log::Message::Item.3*
 
 %files Log-Message-Simple
 %{privlib}/Log/Message/Simple.pm
-%{_mandir}/man3/Log::Message::Simple.3*
 
 %files Module-Build
 %{_bindir}/config_data
 %{privlib}/inc/
 %{privlib}/Module/Build/
 %{privlib}/Module/Build.pm
-%{_mandir}/man1/config_data.1*
-%{_mandir}/man3/Module::Build*
-%{_mandir}/man3/inc::latest.3*
 
 %files Module-CoreList
 %{_bindir}/corelist
 %{privlib}/Module/CoreList.pm
-%{_mandir}/man1/corelist*
-%{_mandir}/man3/Module::CoreList*
 
 %files Module-Load
 %{privlib}/Module/Load.pm
-%{_mandir}/man3/Module::Load.*
 
 %files Module-Load-Conditional
 %{privlib}/Module/Load/
-%{_mandir}/man3/Module::Load::Conditional* 
 
 %files Module-Loaded
 %dir %{privlib}/Module/
 %{privlib}/Module/Loaded.pm
-%{_mandir}/man3/Module::Loaded*
 
 %files Module-Metadata
 %{privlib}/Module/Metadata.pm
-%{_mandir}/man3/Module::Metadata.3pm*
 
 %files Module-Pluggable
 %{privlib}/Devel/InnerPackage.pm
 %{privlib}/Module/Pluggable/
 %{privlib}/Module/Pluggable.pm
-%{_mandir}/man3/Devel::InnerPackage*
-%{_mandir}/man3/Module::Pluggable*
 
 %files Object-Accessor
 %{privlib}/Object/
-%{_mandir}/man3/Object::Accessor*
 
 %files Package-Constants
 %{privlib}/Package/
-%{_mandir}/man3/Package::Constants*
 
 %files Params-Check
 %{privlib}/Params/
-%{_mandir}/man3/Params::Check*
 
 %files Parse-CPAN-Meta
 %dir %{privlib}/Parse/
 %dir %{privlib}/Parse/CPAN/
 %{privlib}/Parse/CPAN/Meta.pm
-%{_mandir}/man3/Parse::CPAN::Meta.3*
 
 %files parent
 %{privlib}/parent.pm
-%{_mandir}/man3/parent.3*
 
 %files Perl-OSType
 %{privlib}/Perl/OSType.pm
-%{_mandir}/man3/Perl::OSType.3pm*
 
 %files Pod-Escapes
 %{privlib}/Pod/Escapes.pm
-%{_mandir}/man3/Pod::Escapes.*
 
 %files Pod-Parser
 %{_bindir}/pod2usage
@@ -2260,103 +2010,69 @@ sed \
 %{privlib}/Pod/PlainText.pm
 %{privlib}/Pod/Select.pm
 %{privlib}/Pod/Usage.pm
-%{_mandir}/man1/pod2usage.1*
-%{_mandir}/man1/podchecker.1*
-%{_mandir}/man1/podselect.1*
-%{_mandir}/man3/Pod::Checker.*
-%{_mandir}/man3/Pod::Find.*
-%{_mandir}/man3/Pod::InputObjects.*
-%{_mandir}/man3/Pod::ParseUtils.*
-%{_mandir}/man3/Pod::Parser.*
-%{_mandir}/man3/Pod::PlainText.*
-%{_mandir}/man3/Pod::Select.*
-%{_mandir}/man3/Pod::Usage.*
 
 %files Pod-Perldoc
 %{_bindir}/perldoc
 %{privlib}/pod/perldoc.pod
 %{privlib}/Pod/Perldoc.pm
 %{privlib}/Pod/Perldoc/
-%{_mandir}/man1/perldoc.1*
-%{_mandir}/man3/Pod::Perldoc*
-
 %files Pod-Simple
 %{privlib}/Pod/Simple/ 
 %{privlib}/Pod/Simple.pm
 %{privlib}/Pod/Simple.pod
-%{_mandir}/man3/Pod::Simple*
 
 %files Scalar-List-Utils
 %{archlib}/List/
 %{archlib}/Scalar/
 %{archlib}/auto/List/
-%{_mandir}/man3/List::Util*
-%{_mandir}/man3/Scalar::Util*
 
 %files Socket
 %dir %{archlib}/auto/Socket
 %{archlib}/auto/Socket/Socket.*
 %{archlib}/Socket.pm
-%{_mandir}/man3/Socket.3*
 
 %files Term-UI
 %{privlib}/Term/UI/
 %{privlib}/Term/UI.pm
-%{_mandir}/man3/Term::UI*
 
 %files Test-Harness
 %{_bindir}/prove
 %{privlib}/App*
 %{privlib}/TAP*
 %{privlib}/Test/Harness*
-%{_mandir}/man1/prove.1*
-%{_mandir}/man3/App*
-%{_mandir}/man3/TAP*
-%{_mandir}/man3/Test::Harness*
 
 %files Test-Simple
 %{privlib}/Test/More*
 %{privlib}/Test/Builder*
 %{privlib}/Test/Simple*
 %{privlib}/Test/Tutorial*
-%{_mandir}/man3/Test::More*
-%{_mandir}/man3/Test::Builder*
-%{_mandir}/man3/Test::Simple*
-%{_mandir}/man3/Test::Tutorial*
 
 %files Test-Simple-tests
 %dir %{perl5_testdir}
 %{perl5_testdir}/Test-Simple
 
 %files Time-Piece
-%{archlib}/Time/Piece.pm 
+%{archlib}/Time/Piece.pm
 %{archlib}/Time/Seconds.pm
-%{archlib}/auto/Time/Piece/        
-%{_mandir}/man3/Time::Piece.3*
-%{_mandir}/man3/Time::Seconds.3*
+%{archlib}/auto/Time/Piece/
 
 %files Version-Requirements
 %{privlib}/Version/Requirements.pm
-%{_mandir}/man3/Version::Requirements*
 
 %files threads
 %dir %{archlib}/auto/threads
 %{archlib}/auto/threads/threads*
 %{archlib}/threads.pm
-%{_mandir}/man3/threads.3*
 
 %files threads-shared
 %{archlib}/auto/threads/shared*
 %dir %{archlib}/threads
 %{archlib}/threads/shared*
-%{_mandir}/man3/threads::shared*
 
 %files version
 %{privlib}/version.pm
 %{privlib}/version.pod
 %{privlib}/version/
-%{_mandir}/man3/version.3*
-%{_mandir}/man3/version::Internals.3*
 
 %files core
 # Nothing. Nada. Zilch. Zarro. Uh uh. Nope. Sorry.
