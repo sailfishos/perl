@@ -325,15 +325,15 @@ BuildArch:      noarch
 %description CPAN
 Query, download and build perl modules from CPAN sites.
 
-#%package CPAN-Meta
+#%%package CPAN-Meta
 #Summary:        Distribution metadata for a CPAN dist
 #Version:        2.120630
 #License:        GPL+ or Artistic
 #Group:          Development/Libraries
-#Requires:       perl = %{perl_epoch}:%{perl_version}
+#Requires:       perl = %%{perl_epoch}:%%{perl_version}
 #BuildArch:      noarch
 
-#%description CPAN-Meta
+#%%description CPAN-Meta
 #Software distributions released to the CPAN include a META.json or, for
 #older distributions, META.yml, which describes the distribution, its
 #contents, and the requirements for building and installing the
@@ -1202,11 +1202,11 @@ rm -rf cpan/Compress-Raw-Zlib/zlib-src
 rm -rf cpan/Compress-Raw-Bzip2/bzip2-src
 sed -i '/\(bzip2\|zlib\)-src/d' MANIFEST
 
-#%if !%{with gdbm}
+#%%if !%%{with gdbm}
 # Do not install anything requiring NDBM_File if NDBM is not available.
 rm -rf 'cpan/Memoize/Memoize/NDBM_File.pm'
 sed -i '\|cpan/Memoize/Memoize/NDBM_File.pm|d' MANIFEST
-#%endif
+#%%endif
 
 %build
 echo "RPM Build arch: %{_arch}"
