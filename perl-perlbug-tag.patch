@@ -1,7 +1,7 @@
-diff -up perl-5.16.0-RC2/utils/perlbug.PL.fedora perl-5.16.0-RC2/utils/perlbug.PL
---- perl-5.16.0-RC2/utils/perlbug.PL.fedora	2012-05-16 16:15:51.000000000 +0200
-+++ perl-5.16.0-RC2/utils/perlbug.PL	2012-05-16 16:18:36.018894464 +0200
-@@ -271,17 +271,6 @@ sub Init {
+diff -up perl-5.28.0-RC1/utils/perlbug.PL.orig perl-5.28.0-RC1/utils/perlbug.PL
+--- perl-5.28.0-RC1/utils/perlbug.PL.orig	2018-05-21 12:44:04.000000000 +0200
++++ perl-5.28.0-RC1/utils/perlbug.PL	2018-05-22 12:17:58.584993588 +0200
+@@ -288,17 +288,6 @@ sub Init {
      $ok = '';
      if ($opt{o}) {
  	if ($opt{o} eq 'k' or $opt{o} eq 'kay') {

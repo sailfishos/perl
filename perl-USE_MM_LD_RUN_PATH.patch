@@ -1,7 +1,7 @@
 diff -up perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/Liblist.pm.usem perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/Liblist.pm
 --- perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/Liblist.pm.usem	2011-05-08 05:10:08.000000000 +0200
 +++ perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/Liblist.pm	2011-05-17 11:14:22.169115984 +0200
-@@ -88,6 +88,11 @@ libraries.  LD_RUN_PATH is a colon separ
+@@ -89,6 +89,11 @@ libraries.  LD_RUN_PATH is a colon separ
  in LDLOADLIBS. It is passed as an environment variable to the process
  that links the shared library.
  
@@ -16,16 +16,16 @@ diff -up perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/Liblist.pm.usem perl-5
 diff -up perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/MakeMaker.pm.usem perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/MakeMaker.pm
 --- perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/MakeMaker.pm.usem	2011-05-08 05:10:08.000000000 +0200
 +++ perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/MakeMaker.pm	2011-05-17 13:39:26.912586030 +0200
-@@ -278,7 +278,7 @@ sub full_setup {
-     PERL_SRC PERM_DIR PERM_RW PERM_RWX
-     PL_FILES PM PM_FILTER PMLIBDIRS PMLIBPARENTDIRS POLLUTE PPM_INSTALL_EXEC
-     PPM_INSTALL_SCRIPT PREREQ_FATAL PREREQ_PM PREREQ_PRINT PRINT_PREREQ
--    SIGN SKIP TYPEMAPS VERSION VERSION_FROM XS XSOPT XSPROTOARG
-+    SIGN SKIP TYPEMAPS USE_MM_LD_RUN_PATH VERSION VERSION_FROM XS XSOPT XSPROTOARG
-     XS_VERSION clean depend dist dynamic_lib linkext macro realclean
-     tool_autosplit
+@@ -317,7 +317,7 @@ sub full_setup {
+     PERM_DIR PERM_RW PERM_RWX MAGICXS
+     PL_FILES PM PM_FILTER PMLIBDIRS PMLIBPARENTDIRS POLLUTE
+     PREREQ_FATAL PREREQ_PM PREREQ_PRINT PRINT_PREREQ PUREPERL_ONLY
+-    SIGN SKIP TEST_REQUIRES TYPEMAPS UNINST VERSION VERSION_FROM XS
++    SIGN SKIP TEST_REQUIRES TYPEMAPS UNINST USE_MM_LD_RUN_PATH VERSION VERSION_FROM XS
+     XSBUILD XSMULTI XSOPT XSPROTOARG XS_VERSION
+     clean depend dist dynamic_lib linkext macro realclean tool_autosplit
  
-@@ -422,7 +422,27 @@ sub new {
+@@ -501,7 +501,27 @@ sub new {
      # PRINT_PREREQ is RedHatism.
      if ("@ARGV" =~ /\bPRINT_PREREQ\b/) {
          $self->_PRINT_PREREQ;
@@ -52,9 +52,9 @@ diff -up perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/MakeMaker.pm.usem perl
 +       $self->{USE_MM_LD_RUN_PATH}=$v;
 +    };
  
-     print STDOUT "MakeMaker (v$VERSION)\n" if $Verbose;
-     if (-f "MANIFEST" && ! -f "Makefile" && ! $ENV{PERL_CORE}){
-@@ -2352,6 +2372,40 @@ precedence.  A typemap in the current di
+     print "MakeMaker (v$VERSION)\n" if $Verbose;
+     if (-f "MANIFEST" && ! -f "Makefile" && ! $UNDER_CORE){
+@@ -2821,6 +2841,40 @@ precedence.  A typemap in the current di
  precedence, even if it isn't listed in TYPEMAPS.  The default system
  typemap has lowest precedence.
  
@@ -98,12 +98,12 @@ diff -up perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/MakeMaker.pm.usem perl
 diff -up perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/MM_Unix.pm.usem perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/MM_Unix.pm
 --- perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/MM_Unix.pm.usem	2011-05-08 05:10:08.000000000 +0200
 +++ perl-5.14.0/cpan/ExtUtils-MakeMaker/lib/ExtUtils/MM_Unix.pm	2011-05-17 11:14:22.172115972 +0200
-@@ -944,7 +944,7 @@ $(INST_DYNAMIC): $(OBJECT) $(MYEXTLIB) $
+@@ -1045,7 +1045,7 @@ $(INST_DYNAMIC): $(OBJECT) $(MYEXTLIB) $
      }
  
      my $ld_run_path_shell = "";
 -    if ($self->{LD_RUN_PATH} ne "") {
 +    if (($self->{LD_RUN_PATH} ne "") && ($self->{USE_MM_LD_RUN_PATH})) {
- 	$ld_run_path_shell = 'LD_RUN_PATH="$(LD_RUN_PATH)" ';
+         $ld_run_path_shell = 'LD_RUN_PATH="$(LD_RUN_PATH)" ';
      }
  
