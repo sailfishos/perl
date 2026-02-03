@@ -405,7 +405,6 @@ Utilities for embedding Perl in C/C++ applications.
 Summary:        Install files from here to there
 License:        GPL+ or Artistic
 Version:        2.22
-Requires:       perl-devel
 Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
@@ -438,7 +437,6 @@ Create a module Makefile.
 Summary:        Utilities to write and check a MANIFEST file
 License:        GPL+ or Artistic
 Version:        1.75
-Requires:       perl-devel
 Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 
@@ -736,7 +734,6 @@ such that being individual extensions would be wasteful.
 Summary:        Run Perl standard test scripts with statistics
 License:        GPL+ or Artistic
 Version:        3.48
-Requires:       perl-devel
 Requires:       perl = %{perl_epoch}:%{perl_version}
 BuildArch:      noarch
 # Use rewritten module perl-Test-Harness
@@ -752,7 +749,6 @@ Use TAP::Parser, Test::Harness package was whole rewritten.
 Summary:        Basic utilities for writing tests
 License:        GPL+ or Artistic
 Version:        1.302199
-Requires:       perl-devel
 Requires:       perl = %{perl_epoch}:%{perl_version}
 #Requires:       perl(Data::Dumper)
 BuildArch:      noarch
